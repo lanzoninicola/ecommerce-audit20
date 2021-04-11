@@ -15,6 +15,7 @@ import { HighImpact, MediumImpact, LowImpact } from "../../Icons/Impact/Impact";
 import Filters from "../../Filter/Filters";
 import FilterButton from "../../Filter/FilterButton";
 import testResults from "../../../../config/testResults";
+import { isNotUndefined, isNotEmptyObject, objectKeys } from "@utils";
 
 const ResultTestIcon = ({ result }) => {
   if (result === testResults.passed) {
@@ -51,10 +52,71 @@ const ResultImpactIcon = ({ result }) => {
 const ItemTestResult = ({ dataSectionParsed, sectionShown }) => {
   const [shown, setShown] = React.useState(false);
   const [showDetailsItemId, setShowDetailsItemId] = React.useState(false);
+  const [showFilters, setShowFilters] = React.useState(false);
 
-  const sectionItems = [...dataSectionParsed[sectionShown].records];
+  const [itemsData, setItemsData] = React.useState([
+    ...dataSectionParsed[sectionShown].records,
+  ]);
 
-  const itemsData = [...sectionItems];
+  function handleShowFilter() {
+    setShowFilters(!showFilters);
+  }
+
+  function filterOR(filters) {
+    let filteredData;
+
+    objectKeys(filters).forEach((filter) => {
+      if (filters[filter] !== null && filter === "testResult") {
+        filteredData = itemsData.filter((item) => {
+          return item.resultado.toLowerCase() === filters[filter].toLowerCase();
+        });
+      }
+      if (filters[filter] !== null && filter === "impact") {
+        filteredData = itemsData.filter((item) => {
+          return item.impacto.toLowerCase() === filters[filter].toLowerCase();
+        });
+      }
+    });
+
+    return filteredData;
+  }
+
+  function filterAND(filters) {
+    let filteredData;
+
+    objectKeys(filters).forEach((filter) => {
+      if (filters[filter] !== null && filter === "testResult") {
+        filteredData = itemsData.filter((item) => {
+          return item.resultado.toLowerCase() === filters[filter].toLowerCase();
+        });
+      }
+      if (filters[filter] !== null && filter === "impact") {
+        filteredData = filteredData.filter((item) => {
+          return item.impacto.toLowerCase() === filters[filter].toLowerCase();
+        });
+      }
+    });
+
+    return filteredData;
+  }
+
+  function filterData(filters) {
+    let nextItemsData;
+
+    if (isNotUndefined(filters)) {
+      if (isNotEmptyObject(filters)) {
+        if (filters.testResults !== null && filters.impact !== null) {
+          nextItemsData = filterAND(filters);
+        }
+
+        nextItemsData = filterOR(filters);
+      } else {
+        nextItemsData = [...itemsData];
+      }
+    }
+
+    setItemsData(nextItemsData);
+  }
 
   function handleShowContent(id) {
     setShown(!shown);
@@ -69,9 +131,9 @@ const ItemTestResult = ({ dataSectionParsed, sectionShown }) => {
           <SizedBox key={i}>
             <Card
               borderColor={
-                item.resultado === "Não Passou"
+                item.resultado === testResults.passed
                   ? "red"
-                  : item.resultado === "Oportunidade de Melhorar"
+                  : item.resultado === testResults.improvement
                   ? "yellow"
                   : null
               }
@@ -159,8 +221,8 @@ const ItemTestResult = ({ dataSectionParsed, sectionShown }) => {
           </SizedBox>
         );
       })}
-      <FilterButton />
-      <Filters />
+      <FilterButton onClick={handleShowFilter} />
+      {showFilters && <Filters filterData={filterData} />}
     </FlexContainer>
   );
 };

@@ -176,8 +176,6 @@ const ResultsStats = () => {
 
   resultTotalTestData();
 
-  console.log(sectionShown, showDetails);
-
   return (
     // <FadeIn>
     <FlexContainer column pl="32" pr="32" w={width}>

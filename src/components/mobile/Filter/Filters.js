@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { Text } from "@typography";
+import { Text, SmallText } from "@typography";
 import { FlexContainer, SizedBox } from "@layouts";
 import { BaseButton } from "@buttons";
 import { colorTheme } from "@colors/lib";
@@ -10,6 +10,8 @@ import { objectKeys } from "@utils";
 
 import testResults from "../../../config/testResults";
 import impacts from "../../../config/impacts";
+
+import { PrimaryButton, PrimaryOutlineButton } from "../Buttons/Buttons";
 
 const StyledFilterWindow = styled.div`
   border: none;
@@ -59,11 +61,17 @@ const FilterItem = styled.div`
   padding: 4px;
 `;
 
-const Filters = () => {
+const Filters = ({ filterData }) => {
   const [showSubFilter, setShowSubFilter] = React.useState(false);
   const [filterType, setFilterType] = React.useState(null);
   const [filterTestResult, setFilterTestResult] = React.useState(null);
   const [filterImpactResult, setFilterImpactResult] = React.useState(null);
+
+  function handlefilterReset() {
+    filterData({});
+    setFilterTestResult(null);
+    setFilterImpactResult(null);
+  }
 
   function handleTestResultFiltered(testResultItem) {
     setFilterTestResult(testResultItem);
@@ -130,12 +138,13 @@ const Filters = () => {
           <SizedBox h="16" />
           <FlexContainer row centerY mb="16">
             <Text size={{ mobile: 14 }} left color="white">
-              passaram os test com o resultato
+              passaram os test com esse resultato
               {filterTestResult === null ? (
                 <BaseButton
                   w="100"
                   h="30"
                   onClick={() => renderFilterType("testResults")}
+                  color="orange"
                 >
                   <Text size={{ mobile: 12 }}>escolha</Text>
                 </BaseButton>
@@ -148,12 +157,13 @@ const Filters = () => {
           </FlexContainer>
           <FlexContainer row centerY>
             <Text size={{ mobile: 14 }} left color="white">
-              e tem um impacto{" "}
+              e teria um impacto{" "}
               {filterImpactResult === null ? (
                 <BaseButton
                   w="100"
                   h="30"
                   onClick={() => renderFilterType("impactResults")}
+                  color="orange"
                 >
                   <Text size={{ mobile: 12 }}>escolha</Text>
                 </BaseButton>
@@ -166,6 +176,47 @@ const Filters = () => {
             </Text>
           </FlexContainer>
         </FlexContainer>
+        <FlexContainer row right pt="32">
+          <PrimaryOutlineButton
+            buttonStyle={{
+              w: "100",
+              h: "30",
+            }}
+            onClick={() => {
+              if (filterTestResult || filterImpactResult) {
+                handlefilterReset();
+              }
+            }}
+            text="redefinir"
+            textStyle={{
+              size: { mobile: 12 },
+            }}
+          />
+          <SizedBox w="8" />
+          <PrimaryButton
+            buttonStyle={{
+              w: "100",
+              h: "30",
+            }}
+            onClick={() => {
+              if (filterTestResult || filterImpactResult) {
+                filterData({
+                  testResult: filterTestResult,
+                  impact: filterImpactResult,
+                });
+              }
+            }}
+            text="aplicar"
+            textStyle={{
+              size: { mobile: 12 },
+            }}
+          />
+        </FlexContainer>
+        {filterTestResult === null && filterImpactResult === null && (
+          <SmallText color="orange" italic mt="8">
+            Seleciona pelo menos um filtro ou fecha a janela
+          </SmallText>
+        )}
       </StyledFilterWindow>
     </>
   );

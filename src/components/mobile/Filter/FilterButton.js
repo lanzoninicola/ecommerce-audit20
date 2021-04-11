@@ -15,9 +15,9 @@ const StyledFilterButton = styled.button`
   right: 20px;
 `;
 
-const FilterButton = ({ prevPage }) => {
+const FilterButton = ({ onClick }) => {
   return (
-    <StyledFilterButton onClick={prevPage}>
+    <StyledFilterButton onClick={onClick}>
       <SVGIcon name="FILTER" size="24" color="white" />
     </StyledFilterButton>
   );
