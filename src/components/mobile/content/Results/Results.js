@@ -1,33 +1,20 @@
 import * as React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 
-import { Title, Text, SmallText } from "@typography";
-import { FlexContainer, GridFixedContainer, SizedBox } from "@layouts";
-import { FadeIn } from "@animations";
+import { FlexContainer, SizedBox } from "@layouts";
 import { useViewportInfo } from "@hooks";
-import { camelize, objectKeys } from "@utils";
+import { camelize } from "@utils";
 
 import { parseData } from "../../../../../data/parsedData";
 import { translate } from "../../../../config/dictionary";
 import { websitePages } from "../../../../config/pages";
 
-import ResultCard from "./ResultCard";
-import Card from "../../Card/Card";
+import testResults from "../../../../config/testResults";
+import GlobalTestResult from "./GlobalTestResult";
+import SectionTestResult from "./SectionTestResult";
+import ItemTestResult from "./ItemTestResult";
 
-const CardData = ({ number, description }) => {
-  return (
-    <Card>
-      <FlexContainer column centerX centerY>
-        <Text center color="orange" weight="600" size={{ mobile: 32 }}>
-          {number}
-        </Text>
-        <SmallText size={{ mobile: 10 }} center weight="600">
-          {description}
-        </SmallText>
-      </FlexContainer>
-    </Card>
-  );
-};
+// TODO: Refactor the code removing data logic. I created a DataProvider and DataContext to let data available through the app.
 
 const ResultsStats = () => {
   const { width } = useViewportInfo();
@@ -80,28 +67,28 @@ const ResultsStats = () => {
 
     allAuditRecords.forEach((item, i) => {
       if (item.pagina === page) {
-        if (item.resultado === "Passou") {
+        if (item.resultado === testResults.passed) {
           let nextResult = { ...dataSectionParsed[pageEN]["results"] };
           counterPassed = counterPassed + 1;
           nextResult = { ...nextResult, passed: counterPassed };
           dataSectionParsed[pageEN]["results"] = nextResult;
         }
 
-        if (item.resultado === "Oportunidade de Melhorar") {
+        if (item.resultado === testResults.improvement) {
           let nextResult = { ...dataSectionParsed[pageEN]["results"] };
           counterImprovement = counterImprovement + 1;
           nextResult = { ...nextResult, improvement: counterImprovement };
           dataSectionParsed[pageEN]["results"] = nextResult;
         }
 
-        if (item.resultado === "Não Passou") {
+        if (item.resultado === testResults.notPassed) {
           let nextResult = { ...dataSectionParsed[pageEN]["results"] };
           counterNotPassed = counterNotPassed + 1;
           nextResult = { ...nextResult, notPassed: counterNotPassed };
           dataSectionParsed[pageEN]["results"] = nextResult;
         }
 
-        if (item.resultado === "Não Testado") {
+        if (item.resultado === testResults.notTested) {
           let nextResult = { ...dataSectionParsed[pageEN]["results"] };
           counterNotTested = counterNotTested + 1;
           nextResult = { ...nextResult, notTested: counterNotTested };
@@ -143,28 +130,28 @@ const ResultsStats = () => {
       nextResult = { ...nextResult, total: counterTotal };
       testTotalResults["results"] = nextResult;
 
-      if (item.resultado === "Passou") {
+      if (item.resultado === testResults.passed) {
         let nextResult = { ...testTotalResults["results"] };
         counterPassed = counterPassed + 1;
         nextResult = { ...nextResult, passed: counterPassed };
         testTotalResults["results"] = nextResult;
       }
 
-      if (item.resultado === "Oportunidade de Melhorar") {
+      if (item.resultado === testResults.improvement) {
         let nextResult = { ...testTotalResults["results"] };
         counterImprovement = counterImprovement + 1;
         nextResult = { ...nextResult, improvement: counterImprovement };
         testTotalResults["results"] = nextResult;
       }
 
-      if (item.resultado === "Não Passou") {
+      if (item.resultado === testResults.notPassed) {
         let nextResult = { ...testTotalResults["results"] };
         counterNotPassed = counterNotPassed + 1;
         nextResult = { ...nextResult, notPassed: counterNotPassed };
         testTotalResults["results"] = nextResult;
       }
 
-      if (item.resultado === "Não Testado") {
+      if (item.resultado === testResults.notTested) {
         let nextResult = { ...testTotalResults["results"] };
         counterNotTested = counterNotTested + 1;
         nextResult = { ...nextResult, notTested: counterNotTested };
@@ -189,31 +176,28 @@ const ResultsStats = () => {
 
   resultTotalTestData();
 
-  console.log(testTotalResults);
+  console.log(sectionShown, showDetails);
 
   return (
     // <FadeIn>
     <FlexContainer column pl="32" pr="32" w={width}>
       {showDetails === false && (
         <>
-          <Title as="h4" weight="600" mb="16">
-            Resultado total
-          </Title>
-          <ResultCard
-            title="Total"
+          <GlobalTestResult
+            total={testTotalResults.results.total}
             passed={
               testTotalResults.results.passed
                 ? testTotalResults.results.passed
                 : 0
             }
-            improvement={
-              testTotalResults.results.improvement
-                ? testTotalResults.results.improvement
-                : 0
-            }
             notPassed={
               testTotalResults.results.notPassed
                 ? testTotalResults.results.notPassed
+                : 0
+            }
+            improvement={
+              testTotalResults.results.improvement
+                ? testTotalResults.results.improvement
                 : 0
             }
             notTested={
@@ -222,103 +206,19 @@ const ResultsStats = () => {
                 : 0
             }
           />
-          <SizedBox h={24} />
-          <FlexContainer column>
-            <Text size={{ mobile: 16 }} mb="4">
-              {`${
-                (testTotalResults.results.passed /
-                  testTotalResults.results.total) *
-                100
-              }% dos elementos passou a analisi e não são necessárias atividade`}
-            </Text>
-            <Text size={{ mobile: 16 }} mb="4">
-              {`${
-                (testTotalResults.results.improvement /
-                  testTotalResults.results.total) *
-                100
-              }% dos elementos precisa ser ainda melhorado`}
-            </Text>
-
-            <Text size={{ mobile: 16 }} mb="4">
-              {`${
-                (testTotalResults.results.notPassed /
-                  testTotalResults.results.total) *
-                100
-              }% dos elementos precisa de nova implementação ou mudança radical`}
-            </Text>
-
-            <Text size={{ mobile: 16 }} mb="4">
-              {`${
-                (testTotalResults.results.notTested /
-                  testTotalResults.results.total) *
-                100
-              }% dos elementos não foi testada porque não disponivel no momento da
-          verifica`}
-            </Text>
-          </FlexContainer>
           <SizedBox h={48} />
-
-          <Title as="h4" weight="600" mb="16">
-            Resultado para cada pagina do site
-          </Title>
-
-          {objectKeys(dataSectionParsed).map((item, i) => {
-            const value_pt = dataSectionParsed[item].value_pt;
-            const passed = dataSectionParsed[item].results.passed;
-            const improvement = dataSectionParsed[item].results.improvement;
-            const notPassed = dataSectionParsed[item].results.notPassed;
-            const notTested = dataSectionParsed[item].results.notTested;
-            return (
-              <>
-                <ResultCard
-                  key={i}
-                  title={value_pt}
-                  passed={passed ? passed : 0}
-                  improvement={improvement ? improvement : 0}
-                  notPassed={notPassed ? notPassed : 0}
-                  notTested={notTested ? notTested : 0}
-                  handleDetails={() => handleDetails(value_pt)}
-                >
-                  <SizedBox h="8" />
-                  <Text center size={{ mobile: 12 }}>
-                    clique para ver detalhes
-                  </Text>
-                </ResultCard>
-                <SizedBox h={16} />
-              </>
-            );
-          })}
+          <SectionTestResult
+            dataSectionParsed={dataSectionParsed}
+            handleDetails={handleDetails}
+          />
         </>
       )}
       {showDetails === true && (
-        <>
-          {objectKeys(dataSectionParsed[sectionShown]).map((item, i) => {
-            const value_pt = dataSectionParsed[item].value_pt;
-            const passed = dataSectionParsed[item].results.passed;
-            const improvement = dataSectionParsed[item].results.improvement;
-            const notPassed = dataSectionParsed[item].results.notPassed;
-            const notTested = dataSectionParsed[item].results.notTested;
-            return (
-              <>
-                <ResultCard
-                  key={i}
-                  title={value_pt}
-                  passed={passed ? passed : 0}
-                  improvement={improvement ? improvement : 0}
-                  notPassed={notPassed ? notPassed : 0}
-                  notTested={notTested ? notTested : 0}
-                  onClick={() => handleDetails(value_pt)}
-                >
-                  <SizedBox h="8" />
-                  <Text center size={{ mobile: 12 }}>
-                    clique para ver detalhes
-                  </Text>
-                </ResultCard>
-                <SizedBox h={16} />
-              </>
-            );
-          })}
-        </>
+        <ItemTestResult
+          dataSectionParsed={dataSectionParsed}
+          sectionShown={sectionShown}
+          handleDetails={handleDetails}
+        />
       )}
     </FlexContainer>
     // </FadeIn>

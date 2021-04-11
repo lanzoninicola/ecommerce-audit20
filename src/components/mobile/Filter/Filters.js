@@ -1,0 +1,174 @@
+import * as React from "react";
+import styled from "styled-components";
+
+import { Text } from "@typography";
+import { FlexContainer, SizedBox } from "@layouts";
+import { BaseButton } from "@buttons";
+import { colorTheme } from "@colors/lib";
+
+import { objectKeys } from "@utils";
+
+import testResults from "../../../config/testResults";
+import impacts from "../../../config/impacts";
+
+const StyledFilterWindow = styled.div`
+  border: none;
+  border-radius: 10px;
+  background: ${() => colorTheme("black", { opacity: 0.8 })};
+  height: auto;
+  width: 90%;
+  position: fixed;
+  bottom: 10%;
+  right: 20px;
+  padding: 20px;
+`;
+
+// const StyledSubFilterWindow = styled.div`
+//   border: none;
+//   border-radius: 10px;
+//   background: ${() => colorTheme("black", { opacity: 0.9 })};
+//   height: auto;
+//   width: 90%;
+//   position: fixed;
+//   bottom: 50%;
+//   right: 20px;
+//   padding: 20px;
+//   z-index: 2;
+// `;
+
+const StyledSubFilterWindow = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: ${() => colorTheme("black", { opacity: 0.9 })};
+  padding: 20px;
+  display: flex;
+  justify-items: center;
+  z-index: 2;
+`;
+
+const FilterItem = styled.div`
+  border: none;
+  border-radius: 10px;
+  background: ${() => colorTheme("white", { opacity: 0.4 })};
+  height: auto;
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 4px;
+`;
+
+const Filters = () => {
+  const [showSubFilter, setShowSubFilter] = React.useState(false);
+  const [filterType, setFilterType] = React.useState(null);
+  const [filterTestResult, setFilterTestResult] = React.useState(null);
+  const [filterImpactResult, setFilterImpactResult] = React.useState(null);
+
+  function handleTestResultFiltered(testResultItem) {
+    setFilterTestResult(testResultItem);
+    setShowSubFilter(false);
+  }
+
+  function renderTestResultsList() {
+    return (
+      <FlexContainer column centerX centerY w100>
+        {objectKeys(testResults).map((item, i) => (
+          <FilterItem
+            key={i}
+            onClick={() => handleTestResultFiltered(testResults[item])}
+          >
+            <Text color="white" center>
+              {testResults[item]}
+            </Text>
+          </FilterItem>
+        ))}
+      </FlexContainer>
+    );
+  }
+
+  function handleImpactFiltered(impactItem) {
+    setFilterImpactResult(impactItem);
+    setShowSubFilter(false);
+  }
+
+  function renderImpactsList() {
+    return (
+      <FlexContainer column centerX centerY w100>
+        {objectKeys(impacts).map((item, i) => (
+          <FilterItem
+            key={i}
+            onClick={() => handleImpactFiltered(impacts[item])}
+          >
+            <Text color="white" center>
+              {impacts[item]}
+            </Text>
+          </FilterItem>
+        ))}
+      </FlexContainer>
+    );
+  }
+
+  function renderFilterType(filterType) {
+    setShowSubFilter(true);
+    setFilterType(filterType);
+  }
+
+  return (
+    <>
+      {showSubFilter && (
+        <StyledSubFilterWindow>
+          {filterType === "testResults" && renderTestResultsList()}
+          {filterType === "impactResults" && renderImpactsList()}
+        </StyledSubFilterWindow>
+      )}
+      <StyledFilterWindow>
+        <FlexContainer column>
+          <Text size={{ mobile: 18 }} weight="600" left color="white">
+            Eu só quero ver os elementos que
+          </Text>
+          <SizedBox h="16" />
+          <FlexContainer row centerY mb="16">
+            <Text size={{ mobile: 14 }} left color="white">
+              passaram os test com o resultato
+              {filterTestResult === null ? (
+                <BaseButton
+                  w="100"
+                  h="30"
+                  onClick={() => renderFilterType("testResults")}
+                >
+                  <Text size={{ mobile: 12 }}>escolha</Text>
+                </BaseButton>
+              ) : (
+                <Text size={{ mobile: 16 }} color="orange" weight="800" left>
+                  {filterTestResult}
+                </Text>
+              )}
+            </Text>
+          </FlexContainer>
+          <FlexContainer row centerY>
+            <Text size={{ mobile: 14 }} left color="white">
+              e tem um impacto{" "}
+              {filterImpactResult === null ? (
+                <BaseButton
+                  w="100"
+                  h="30"
+                  onClick={() => renderFilterType("impactResults")}
+                >
+                  <Text size={{ mobile: 12 }}>escolha</Text>
+                </BaseButton>
+              ) : (
+                <Text size={{ mobile: 16 }} color="orange" weight="800" left>
+                  {filterImpactResult}
+                </Text>
+              )}{" "}
+              no resultado da venda.
+            </Text>
+          </FlexContainer>
+        </FlexContainer>
+      </StyledFilterWindow>
+    </>
+  );
+};
+
+export default Filters;

@@ -1,6 +1,6 @@
-import * as React from "react"
-import styled from "styled-components"
-import { Size, Margins, Paddings } from "@layouts"
+import * as React from "react";
+import styled from "styled-components";
+import { Size, Margins, Paddings } from "@layouts";
 
 const StyledButtonBase = styled.button`
   ${Size}
@@ -13,12 +13,12 @@ const StyledButtonBase = styled.button`
   font-weight: normal;
   font-size: 16px;
   cursor: pointer;
-`
+`;
 
 const BaseButton = React.forwardRef(({ children, ...props }, ref) => (
-  <StyledButtonBase ref={ref} w="215" h="50" mt="16" wFixed hFixed {...props}>
+  <StyledButtonBase ref={ref} w="215" h="50" wFixed hFixed {...props}>
     {children}
   </StyledButtonBase>
-))
+));
 
-export default BaseButton
+export default BaseButton;

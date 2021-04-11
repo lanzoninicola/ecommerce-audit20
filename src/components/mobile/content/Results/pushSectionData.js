@@ -1,3 +1,5 @@
+import testResults from "../../../../config/testResults";
+
 function pushSectionData(page) {
   const dataParsed = {};
 
@@ -23,27 +25,27 @@ function pushSectionData(page) {
 
       dataParsed[pageEN]["results"] = nextResult;
 
-      if (item.resultado === "Passou") {
+      if (item.resultado === testResults.passed) {
         let nextResult = { ...dataParsed[pageEN]["results"] };
         nextResult = { ...nextResult, passed: counterPassed++ };
 
         dataParsed[pageEN]["results"] = nextResult;
       }
 
-      if (item.resultado === "Oportunidade de Melhorar") {
+      if (item.resultado === testResults.improvement) {
         let nextResult = { ...dataParsed[pageEN]["results"] };
         nextResult = { ...nextResult, improvement: counterImprovement++ };
 
         dataParsed[pageEN]["results"] = nextResult;
       }
 
-      if (item.resultado === "Não Passou") {
+      if (item.resultado === testResults.notPassed) {
         let nextResult = { ...dataParsed[pageEN]["results"] };
         nextResult = { ...nextResult, notPassed: counterNotPassed++ };
         dataParsed[pageEN]["results"] = nextResult;
       }
 
-      if (item.resultado === "Não Testado") {
+      if (item.resultado === testResults.notTested) {
         let nextResult = { ...dataParsed[pageEN]["results"] };
         nextResult = { ...nextResult, notTested: counterNotTested++ };
         dataParsed[pageEN]["results"] = nextResult;

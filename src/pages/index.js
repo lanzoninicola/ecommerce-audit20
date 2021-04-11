@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { FlexContainer, SizedBox, GridFixedContainer } from "@layouts";
 import { SmallText } from "@typography";
 
@@ -16,6 +17,7 @@ import ResultsStats from "../components/mobile/content/Results/Results";
 // markup
 const IndexPage = () => {
   const [currentPage, setCurrentPage] = React.useState(0);
+
   const pagesQueue = [
     // <Introduction />,
     // <ReportExplanation />,

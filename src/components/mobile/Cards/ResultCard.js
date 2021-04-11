@@ -7,10 +7,10 @@ import {
   NotPassedIcon,
   ImprovementIcon,
   NotTestedIcon,
-} from "../../Icons/TestResults/TestResults";
-import Card from "../../Card/Card";
+} from "../Icons/TestResults/TestResults";
+import Card from "./CardWrapper";
 
-const ResultCard = ({
+const ResultSingleCardData = ({
   title,
   passed,
   improvement,
@@ -63,4 +63,4 @@ const ResultCard = ({
   );
 };
 
-export default ResultCard;
+export default ResultSingleCardData;
