@@ -142,8 +142,13 @@ const Filters = ({ applyFilterData, showFilterWindow }) => {
         </StyledSubFilterWindow>
       )}
       <StyledFilterWindow>
-        <FlexContainer column onClick={() => showFilterWindow(false)}>
-          <FlexContainer row right mb="24">
+        <FlexContainer column>
+          <FlexContainer
+            row
+            right
+            mb="24"
+            onClick={() => showFilterWindow(false)}
+          >
             <SVGIcon name="CLOSE" color="white" />
           </FlexContainer>
           <Text size={{ mobile: 18 }} weight="600" left color="white">

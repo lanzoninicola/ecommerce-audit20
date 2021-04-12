@@ -12,7 +12,7 @@ const StyledFilterButton = styled.button`
   width: 50px;
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 80px;
 `;
 
 const FilterButton = ({ onClick }) => {

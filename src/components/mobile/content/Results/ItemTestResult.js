@@ -1,8 +1,10 @@
 import * as React from "react";
+import styled from "styled-components";
 
 import { Text } from "@typography";
 import { GridFixedContainer, FlexContainer, SizedBox } from "@layouts";
-import { BaseButton } from "@buttons";
+import { colorTheme } from "@colors/lib";
+import { SVGIcon } from "@icons";
 
 import Card from "../../Cards/CardWrapper";
 import {
@@ -55,7 +57,30 @@ const ResultImpactIcon = ({ result }) => {
   }
 };
 
-const ItemTestResult = ({ dataSectionParsed, sectionShown }) => {
+const StyledVoltarButton = styled.button`
+  border: none;
+  border-radius: 50%;
+  background: ${() => colorTheme("black", { opacity: 0.7 })};
+  height: 50px;
+  width: 50px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+`;
+
+const VoltarButton = ({ onClick }) => {
+  return (
+    <StyledVoltarButton onClick={onClick}>
+      <SVGIcon name="ARROW_LEFT" size="24" color="white" />
+    </StyledVoltarButton>
+  );
+};
+
+const ItemTestResult = ({
+  dataSectionParsed,
+  sectionShown,
+  setShowDetails,
+}) => {
   const [shown, setShown] = React.useState(false);
   const [showDetailsItemId, setShowDetailsItemId] = React.useState(false);
   const [showFilters, setShowFilters] = React.useState(false);
@@ -279,6 +304,7 @@ const ItemTestResult = ({ dataSectionParsed, sectionShown }) => {
           </Text>
         </FlexContainer>
       )}
+      <VoltarButton onClick={() => setShowDetails(false)} />
       <FilterButton onClick={showFilterWindow} />
       {showFilters && (
         <Filters
