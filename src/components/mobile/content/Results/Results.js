@@ -161,7 +161,6 @@ const ResultsStats = () => {
   }
 
   function handleDetails(page) {
-    console.log("clicked");
     setShowDetails(true);
     let pageEN = translate(page);
     pageEN = pageEN.toLowerCase();

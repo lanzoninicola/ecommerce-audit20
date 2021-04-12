@@ -15,7 +15,13 @@ import { HighImpact, MediumImpact, LowImpact } from "../../Icons/Impact/Impact";
 import Filters from "../../Filter/Filters";
 import FilterButton from "../../Filter/FilterButton";
 import testResults from "../../../../config/testResults";
-import { isNotUndefined, isNotEmptyObject, objectKeys } from "@utils";
+import {
+  isNotUndefined,
+  isNotEmptyObject,
+  isEmptyObject,
+  objectKeys,
+} from "@utils";
+import { PrimaryOutlineButton } from "../../Buttons/Buttons";
 
 const ResultTestIcon = ({ result }) => {
   if (result === testResults.passed) {
@@ -58,8 +64,16 @@ const ItemTestResult = ({ dataSectionParsed, sectionShown }) => {
     ...dataSectionParsed[sectionShown].records,
   ]);
 
-  function handleShowFilter() {
+  function showFilterWindow(yesNo) {
+    if (yesNo) {
+      setShowFilters(!yesNo);
+    }
     setShowFilters(!showFilters);
+  }
+
+  function resetFilter() {
+    console.log(dataSectionParsed[sectionShown].records);
+    return [...dataSectionParsed[sectionShown].records];
   }
 
   function filterOR(filters) {
@@ -82,39 +96,65 @@ const ItemTestResult = ({ dataSectionParsed, sectionShown }) => {
   }
 
   function filterAND(filters) {
-    let filteredData;
+    let filteredData = [];
 
-    objectKeys(filters).forEach((filter) => {
-      if (filters[filter] !== null && filter === "testResult") {
-        filteredData = itemsData.filter((item) => {
-          return item.resultado.toLowerCase() === filters[filter].toLowerCase();
-        });
-      }
-      if (filters[filter] !== null && filter === "impact") {
-        filteredData = filteredData.filter((item) => {
-          return item.impacto.toLowerCase() === filters[filter].toLowerCase();
-        });
-      }
+    filteredData = itemsData.filter((item) => {
+      return (
+        item.resultado.toLowerCase() === filters["testResult"].toLowerCase()
+      );
     });
 
-    return filteredData;
+    return filteredData.filter((item) => {
+      return item.impacto.toLowerCase() === filters["impact"].toLowerCase();
+    });
+
+    // objectKeys(filters).forEach((filter) => {
+    //   if (filters[filter] !== null && filter === "testResult") {
+    //     // itemsData.forEach((item) => {
+    //     //   if (
+    //     //     item.resultado.toLowerCase() === filters["testResult"].toLowerCase()
+    //     //   ) {
+    //     //     filteredData.push();
+    //     //   }
+    //     // });
+
+    //     filteredData = itemsData.filter((item) => {
+    //       return (
+    //         item.resultado.toLowerCase() === filters["testResult"].toLowerCase()
+    //       );
+    //     });
+    //   }
+
+    //   console.log("filter AND . filteredData", filteredData);
+
+    //   if (filters[filter] !== null && filter === "impact") {
+    //     filteredData = filteredData.filter((item) => {
+    //       return item.impacto.toLowerCase() === filters["impact"].toLowerCase();
+    //     });
+    //   }
+    // });
+
+    // return filteredData;
   }
 
-  function filterData(filters) {
+  function applyFilterData(filters) {
+    console.log("setFilter data fired");
     let nextItemsData;
 
     if (isNotUndefined(filters)) {
       if (isNotEmptyObject(filters)) {
         if (filters.testResults !== null && filters.impact !== null) {
           nextItemsData = filterAND(filters);
+        } else if (filters.testResults !== null || filters.impact !== null) {
+          nextItemsData = filterOR(filters);
         }
+      }
 
-        nextItemsData = filterOR(filters);
-      } else {
-        nextItemsData = [...itemsData];
+      if (isEmptyObject(filters)) {
+        nextItemsData = resetFilter();
       }
     }
-
+    console.log(nextItemsData);
     setItemsData(nextItemsData);
   }
 
@@ -125,104 +165,127 @@ const ItemTestResult = ({ dataSectionParsed, sectionShown }) => {
 
   return (
     <FlexContainer>
-      {itemsData.map((item, i) => {
-        // console.log(item);
-        return (
-          <SizedBox key={i}>
-            <Card
-              borderColor={
-                item.resultado === testResults.passed
-                  ? "red"
-                  : item.resultado === testResults.improvement
-                  ? "yellow"
-                  : null
-              }
-            >
-              <div
-                style={{
-                  paddingLeft: "8px",
-                  paddingRight: "8px",
-                }}
-              >
-                <GridFixedContainer
-                  columns="1fr .25fr .25fr"
-                  rows="1fr"
-                  pt="8"
-                  pb="8"
-                  centerY
+      {itemsData.length > 0 ? (
+        itemsData.map((item, i) => {
+          // console.log(item);
+          return (
+            <SizedBox key={i}>
+              <Card>
+                <div
+                  style={{
+                    paddingLeft: "8px",
+                    paddingRight: "8px",
+                  }}
                 >
-                  <FlexContainer columns>
-                    <Text
-                      size={{ mobile: 14 }}
-                      weight="600"
-                      left
-                      color="orange"
-                    >
-                      {item.subcategoria}
+                  <GridFixedContainer
+                    columns="1fr .25fr .25fr"
+                    rows="1fr"
+                    pt="8"
+                    pb="8"
+                    centerY
+                  >
+                    <FlexContainer column>
+                      <Text
+                        size={{ mobile: 14 }}
+                        weight="600"
+                        left
+                        color="orange"
+                      >
+                        {item.subcategoria}
+                      </Text>
+                      <Text size={{ mobile: 12 }} left>
+                        {item.categoria}
+                      </Text>
+                    </FlexContainer>
+
+                    <ResultImpactIcon result={item.impacto} />
+                    <ResultTestIcon result={item.resultado} />
+                  </GridFixedContainer>
+                  <FlexContainer column>
+                    <Text size={{ mobile: 12 }} weight="600" left>
+                      Descrição
                     </Text>
                     <Text size={{ mobile: 12 }} left>
-                      {item.categoria}
+                      {item.descricao}
+                    </Text>
+
+                    {shown === true && showDetailsItemId === i && (
+                      <SizedBox>
+                        <Text size={{ mobile: 12 }} weight="600" left>
+                          Informações adicionais
+                        </Text>
+                        <Text size={{ mobile: 12 }} left>
+                          {item.informacoesadicionais}
+                        </Text>
+                        <Text size={{ mobile: 12 }} weight="600" left>
+                          Links úteis
+                        </Text>
+
+                        <Text size={{ mobile: 12 }} left>
+                          {item.linkuteis}
+                        </Text>
+                        <Text size={{ mobile: 12 }} weight="600" left>
+                          Comentários
+                        </Text>
+                        <Text size={{ mobile: 12 }} left>
+                          {item.comentarios}
+                        </Text>
+                      </SizedBox>
+                    )}
+                    <Text size={{ mobile: 12 }} weight="600" left>
+                      Recomendações
+                    </Text>
+
+                    <Text size={{ mobile: 12 }} left>
+                      {item.recomendacoes}
                     </Text>
                   </FlexContainer>
+                  <FlexContainer row centerX centerY>
+                    <PrimaryOutlineButton
+                      buttonStyle={{
+                        w: "200",
+                        h: "30",
+                        mt: "8",
+                        mb: "8",
+                      }}
+                      onClick={() => handleShowContent(i)}
+                      text={
+                        shown && showDetailsItemId === i
+                          ? "esconder"
+                          : "veja os comentarios"
+                      }
+                      textStyle={{
+                        size: { mobile: 12 },
+                        color: "orange",
+                        weight: "800",
+                      }}
+                    ></PrimaryOutlineButton>
+                  </FlexContainer>
+                </div>
+              </Card>
 
-                  <ResultImpactIcon result={item.impacto} />
-                  <ResultTestIcon result={item.resultado} />
-                </GridFixedContainer>
-                <FlexContainer column>
-                  <Text size={{ mobile: 12 }} weight="600" left>
-                    Descrição
-                  </Text>
-                  <Text size={{ mobile: 12 }} left>
-                    {item.descricao}
-                  </Text>
-
-                  {shown === true && showDetailsItemId === i && (
-                    <SizedBox>
-                      <Text size={{ mobile: 12 }} weight="600" left>
-                        Informações adicionais
-                      </Text>
-                      <Text size={{ mobile: 12 }} left>
-                        {item.informacoesadicionais}
-                      </Text>
-                      <Text size={{ mobile: 12 }} weight="600" left>
-                        Links úteis
-                      </Text>
-
-                      <Text size={{ mobile: 12 }} left>
-                        {item.linkuteis}
-                      </Text>
-                      <Text size={{ mobile: 12 }} weight="600" left>
-                        Comentários
-                      </Text>
-                      <Text size={{ mobile: 12 }} left>
-                        {item.comentarios}
-                      </Text>
-                    </SizedBox>
-                  )}
-                  <Text size={{ mobile: 12 }} weight="600" left>
-                    Recomendações
-                  </Text>
-
-                  <Text size={{ mobile: 12 }} left>
-                    {item.recomendacoes}
-                  </Text>
-                </FlexContainer>
-
-                <BaseButton w="150" h="30" onClick={() => handleShowContent(i)}>
-                  <Text size={{ mobile: 12 }}>
-                    {shown && showDetailsItemId === i
-                      ? "esconder"
-                      : "veja os comentarios"}
-                  </Text>
-                </BaseButton>
-              </div>
-            </Card>
-            <SizedBox h={16} />
-          </SizedBox>
-        );
-      })}
-      <FilterButton onClick={handleShowFilter} />
-      {showFilters && <Filters filterData={filterData} />}
+              <SizedBox h={16} />
+            </SizedBox>
+          );
+        })
+      ) : (
+        <FlexContainer column centerX centerY mt="48">
+          <Text size={{ mobile: 16 }} color="black">
+            Nenhum dado foi encontrado
+          </Text>
+          <SizedBox h="8" />
+          <Text size={{ mobile: 14 }} color="black" italic center>
+            Redefina os filtros usados e tenta novamente com outros
+          </Text>
+        </FlexContainer>
+      )}
+      <FilterButton onClick={showFilterWindow} />
+      {showFilters && (
+        <Filters
+          applyFilterData={applyFilterData}
+          showFilterWindow={showFilterWindow}
+        />
+      )}
     </FlexContainer>
   );
 };

@@ -1,16 +1,16 @@
 import * as React from "react";
 import styled from "styled-components";
+import { useLocalStorage } from "@penseapp/uselocalstorage";
 
 import { Text, SmallText } from "@typography";
 import { FlexContainer, SizedBox } from "@layouts";
 import { BaseButton } from "@buttons";
 import { colorTheme } from "@colors/lib";
-
 import { objectKeys } from "@utils";
+import { SVGIcon } from "@icons";
 
 import testResults from "../../../config/testResults";
 import impacts from "../../../config/impacts";
-
 import { PrimaryButton, PrimaryOutlineButton } from "../Buttons/Buttons";
 
 const StyledFilterWindow = styled.div`
@@ -22,7 +22,7 @@ const StyledFilterWindow = styled.div`
   position: fixed;
   bottom: 10%;
   right: 20px;
-  padding: 20px;
+  padding: 10px 20px;
 `;
 
 // const StyledSubFilterWindow = styled.div`
@@ -61,20 +61,31 @@ const FilterItem = styled.div`
   padding: 4px;
 `;
 
-const Filters = ({ filterData }) => {
+const Filters = ({ applyFilterData, showFilterWindow }) => {
   const [showSubFilter, setShowSubFilter] = React.useState(false);
   const [filterType, setFilterType] = React.useState(null);
-  const [filterTestResult, setFilterTestResult] = React.useState(null);
-  const [filterImpactResult, setFilterImpactResult] = React.useState(null);
+  const [filterTestResultValue, setFilterTestResultValue] = useLocalStorage(
+    "alg_filterTestResultValue",
+    null
+  );
+  const [filterImpactValue, setFilterImpactValue] = useLocalStorage(
+    "alg_filterImpactValue",
+    null
+  );
+
+  // const [filterTestResultValue, setFilterTestResultValue] = React.useState(
+  //   null
+  // );
+  // const [filterImpactValue, setFilterImpactValue] = React.useState(null);
 
   function handlefilterReset() {
-    filterData({});
-    setFilterTestResult(null);
-    setFilterImpactResult(null);
+    applyFilterData({});
+    setFilterTestResultValue(null);
+    setFilterImpactValue(null);
   }
 
   function handleTestResultFiltered(testResultItem) {
-    setFilterTestResult(testResultItem);
+    setFilterTestResultValue(testResultItem);
     setShowSubFilter(false);
   }
 
@@ -96,7 +107,7 @@ const Filters = ({ filterData }) => {
   }
 
   function handleImpactFiltered(impactItem) {
-    setFilterImpactResult(impactItem);
+    setFilterImpactValue(impactItem);
     setShowSubFilter(false);
   }
 
@@ -131,7 +142,10 @@ const Filters = ({ filterData }) => {
         </StyledSubFilterWindow>
       )}
       <StyledFilterWindow>
-        <FlexContainer column>
+        <FlexContainer column onClick={() => showFilterWindow(false)}>
+          <FlexContainer row right mb="24">
+            <SVGIcon name="CLOSE" color="white" />
+          </FlexContainer>
           <Text size={{ mobile: 18 }} weight="600" left color="white">
             Eu só quero ver os elementos que
           </Text>
@@ -139,18 +153,20 @@ const Filters = ({ filterData }) => {
           <FlexContainer row centerY mb="16">
             <Text size={{ mobile: 14 }} left color="white">
               passaram os test com esse resultato
-              {filterTestResult === null ? (
+              {filterTestResultValue === null ? (
                 <BaseButton
                   w="100"
                   h="30"
                   onClick={() => renderFilterType("testResults")}
                   color="orange"
                 >
-                  <Text size={{ mobile: 12 }}>escolha</Text>
+                  <Text size={{ mobile: 12 }}>
+                    {filterTestResultValue ? filterTestResultValue : "escolha"}
+                  </Text>
                 </BaseButton>
               ) : (
                 <Text size={{ mobile: 16 }} color="orange" weight="800" left>
-                  {filterTestResult}
+                  {filterTestResultValue}
                 </Text>
               )}
             </Text>
@@ -158,18 +174,20 @@ const Filters = ({ filterData }) => {
           <FlexContainer row centerY>
             <Text size={{ mobile: 14 }} left color="white">
               e teria um impacto{" "}
-              {filterImpactResult === null ? (
+              {filterImpactValue === null ? (
                 <BaseButton
                   w="100"
                   h="30"
                   onClick={() => renderFilterType("impactResults")}
                   color="orange"
                 >
-                  <Text size={{ mobile: 12 }}>escolha</Text>
+                  <Text size={{ mobile: 12 }}>
+                    {filterImpactValue ? filterImpactValue : "escolha"}
+                  </Text>
                 </BaseButton>
               ) : (
                 <Text size={{ mobile: 16 }} color="orange" weight="800" left>
-                  {filterImpactResult}
+                  {filterImpactValue}
                 </Text>
               )}{" "}
               no resultado da venda.
@@ -182,11 +200,7 @@ const Filters = ({ filterData }) => {
               w: "100",
               h: "30",
             }}
-            onClick={() => {
-              if (filterTestResult || filterImpactResult) {
-                handlefilterReset();
-              }
-            }}
+            onClick={handlefilterReset}
             text="redefinir"
             textStyle={{
               size: { mobile: 12 },
@@ -199,12 +213,14 @@ const Filters = ({ filterData }) => {
               h: "30",
             }}
             onClick={() => {
-              if (filterTestResult || filterImpactResult) {
-                filterData({
-                  testResult: filterTestResult,
-                  impact: filterImpactResult,
+              if (filterTestResultValue || filterImpactValue) {
+                applyFilterData({
+                  testResult: filterTestResultValue,
+                  impact: filterImpactValue,
                 });
               }
+
+              showFilterWindow(false);
             }}
             text="aplicar"
             textStyle={{
@@ -212,7 +228,7 @@ const Filters = ({ filterData }) => {
             }}
           />
         </FlexContainer>
-        {filterTestResult === null && filterImpactResult === null && (
+        {filterTestResultValue === null && filterImpactValue === null && (
           <SmallText color="orange" italic mt="8">
             Seleciona pelo menos um filtro ou fecha a janela
           </SmallText>

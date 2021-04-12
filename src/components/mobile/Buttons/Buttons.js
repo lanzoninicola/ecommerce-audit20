@@ -32,7 +32,7 @@ export const PrimaryOutlineButton = ({
 }) => {
   return (
     <StyledPrimaryOutlineButton {...buttonStyle} onClick={onClick}>
-      <Text {...textStyle} color="white">
+      <Text {...textStyle} color={textStyle.color ? textStyle.color : "white"}>
         {text}
       </Text>
     </StyledPrimaryOutlineButton>
