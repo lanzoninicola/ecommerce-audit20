@@ -62,21 +62,21 @@ const FilterItem = styled.div`
 `;
 
 const Filters = ({ applyFilterData, showFilterWindow }) => {
-  const [showSubFilter, setShowSubFilter] = React.useState(false);
-  const [filterType, setFilterType] = React.useState(null);
-  const [filterTestResultValue, setFilterTestResultValue] = useLocalStorage(
-    "alg_filterTestResultValue",
-    null
-  );
-  const [filterImpactValue, setFilterImpactValue] = useLocalStorage(
-    "alg_filterImpactValue",
-    null
-  );
-
-  // const [filterTestResultValue, setFilterTestResultValue] = React.useState(
-  //   null
+  // const [showSubFilter, setShowSubFilter] = React.useState(false);
+  const [subFilter, setSubFilter] = React.useState("");
+  // const [filterTestResultValue, setFilterTestResultValue] = useLocalStorage(
+  //   "alg_filterTestResultValue",
+  //   "todos"
   // );
-  // const [filterImpactValue, setFilterImpactValue] = React.useState(null);
+  // const [filterImpactValue, setFilterImpactValue] = useLocalStorage(
+  //   "alg_filterImpactValue",
+  //   "todos"
+  // );
+
+  const [filterTestResultValue, setFilterTestResultValue] = React.useState(
+    null
+  );
+  const [filterImpactValue, setFilterImpactValue] = React.useState(null);
 
   function handlefilterReset() {
     applyFilterData({});
@@ -86,10 +86,12 @@ const Filters = ({ applyFilterData, showFilterWindow }) => {
 
   function handleTestResultFiltered(testResultItem) {
     setFilterTestResultValue(testResultItem);
-    setShowSubFilter(false);
+    setSubFilter({ ...subFilter, show: false });
   }
 
   function renderTestResultsList() {
+    console.log("renderTestResultsList fired");
+    alert("vai a fare in culo");
     return (
       <FlexContainer column centerX centerY w100>
         {objectKeys(testResults).map((item, i) => (
@@ -108,7 +110,7 @@ const Filters = ({ applyFilterData, showFilterWindow }) => {
 
   function handleImpactFiltered(impactItem) {
     setFilterImpactValue(impactItem);
-    setShowSubFilter(false);
+    setSubFilter({ ...subFilter, show: false });
   }
 
   function renderImpactsList() {
@@ -128,22 +130,27 @@ const Filters = ({ applyFilterData, showFilterWindow }) => {
     );
   }
 
-  function renderFilterType(filterType) {
-    setShowSubFilter(true);
-    setFilterType(filterType);
+  function setSubFilterType(filterTypeRequested) {
+    setSubFilter(filterTypeRequested);
   }
 
   return (
     <>
-      {showSubFilter && (
+      {subFilter !== "" && (
         <StyledSubFilterWindow>
-          {filterType === "testResults" && renderTestResultsList()}
-          {filterType === "impactResults" && renderImpactsList()}
+          {subFilter === "testResults" && renderTestResultsList()}
+          {subFilter === "impactResults" && renderImpactsList()}
         </StyledSubFilterWindow>
       )}
+      {/* <StyledSubFilterWindow>{renderTestResultsList()}</StyledSubFilterWindow> */}
       <StyledFilterWindow>
-        <FlexContainer column onClick={() => showFilterWindow(false)}>
-          <FlexContainer row right mb="24">
+        <FlexContainer column>
+          <FlexContainer
+            row
+            right
+            mb="24"
+            onClick={() => showFilterWindow("hide")}
+          >
             <SVGIcon name="CLOSE" color="white" />
           </FlexContainer>
           <Text size={{ mobile: 18 }} weight="600" left color="white">
@@ -157,7 +164,7 @@ const Filters = ({ applyFilterData, showFilterWindow }) => {
                 <BaseButton
                   w="100"
                   h="30"
-                  onClick={() => renderFilterType("testResults")}
+                  onClick={() => setSubFilterType("testResults")}
                   color="orange"
                 >
                   <Text size={{ mobile: 12 }}>
@@ -178,7 +185,7 @@ const Filters = ({ applyFilterData, showFilterWindow }) => {
                 <BaseButton
                   w="100"
                   h="30"
-                  onClick={() => renderFilterType("impactResults")}
+                  onClick={() => setSubFilterType("impactResults")}
                   color="orange"
                 >
                   <Text size={{ mobile: 12 }}>
@@ -220,7 +227,7 @@ const Filters = ({ applyFilterData, showFilterWindow }) => {
                 });
               }
 
-              showFilterWindow(false);
+              showFilterWindow("hide");
             }}
             text="aplicar"
             textStyle={{

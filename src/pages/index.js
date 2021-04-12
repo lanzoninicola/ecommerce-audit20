@@ -19,12 +19,12 @@ const IndexPage = () => {
   const [currentPage, setCurrentPage] = React.useState(0);
 
   const pagesQueue = [
-    // <Introduction />,
-    // <ReportExplanation />,
-    // <Impacts />,
-    // <CustomerJourney />,
-    // <SummaryStats />,
-    // <ResultsIntroduction />,
+    <Introduction />,
+    <ReportExplanation />,
+    <Impacts />,
+    <CustomerJourney />,
+    <SummaryStats />,
+    <ResultsIntroduction />,
     <ResultsStats />,
   ];
 
@@ -32,6 +32,7 @@ const IndexPage = () => {
     let newPage = currentPage;
     setCurrentPage(() => {
       newPage = currentPage + 1;
+      newPage = newPage > pagesQueue.length - 1 ? currentPage : newPage;
       return newPage;
     });
   }
@@ -70,7 +71,7 @@ const IndexPage = () => {
         </FlexContainer>
       </GridFixedContainer>
 
-      <FlexContainer column centerX>
+      <FlexContainer column centerX centerY h100>
         {pagesQueue[currentPage]}
       </FlexContainer>
     </Layout>

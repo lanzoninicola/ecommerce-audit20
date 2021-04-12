@@ -75,20 +75,14 @@ const CustomerJourney = () => {
       </Title>
       {items.map((item, i) => (
         <motion.div
+          key={i}
           custom={i}
           initial="hidden"
           animate="visible"
           variants={variants}
         >
           {typeof item === "string" ? (
-            <Text
-              key={i}
-              size={{ mobile: 16 }}
-              center
-              weight="400"
-              mt="4"
-              mb="4"
-            >
+            <Text size={{ mobile: 16 }} center weight="400" mt="4" mb="4">
               {item}
             </Text>
           ) : (

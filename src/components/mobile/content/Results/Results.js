@@ -215,6 +215,7 @@ const ResultsStats = () => {
           dataSectionParsed={dataSectionParsed}
           sectionShown={sectionShown}
           handleDetails={handleDetails}
+          setShowDetails={setShowDetails}
         />
       )}
     </FlexContainer>
