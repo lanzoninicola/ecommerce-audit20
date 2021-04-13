@@ -2,10 +2,12 @@ import * as React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-import { Title, Text } from "@typography";
-import { FlexContainer } from "@layouts";
+import { Title, Text, SmallText } from "@typography";
+import { FlexContainer, SizedBox } from "@layouts";
 import { colorTheme } from "@colors/lib";
 import { useViewportInfo } from "@hooks";
+
+import NumberWrapper from "../../NumberWrapper/NumberWrapper";
 
 const DotSeparators = styled.div`
   border: none;
@@ -42,14 +44,14 @@ const items = [
   1,
   1,
   "confirmar a compra",
-  1,
-  1,
-  1,
-  "rastreamento e métricas",
-  1,
-  1,
-  1,
-  "legal",
+  // 1,
+  // 1,
+  // 1,
+  // "rastreamento e métricas",
+  // 1,
+  // 1,
+  // 1,
+  // "legal",
 ];
 
 const CustomerJourney = () => {
@@ -65,32 +67,35 @@ const CustomerJourney = () => {
     hidden: { opacity: 0 },
   };
 
+  let itemCounter = 1;
+
   return (
     <FlexContainer column centerY centerX pl="32" pr="32" w={width}>
       <Title as="h3" weight="600" center>
         Representação do
       </Title>
-      <Title as="h3" mb="16" weight="600" center>
-        Caminho do cliente
+      <Title as="h3" mb="16" weight="600" center color="orange">
+        Jornada do Cliente
       </Title>
       {items.map((item, i) => (
         <motion.div
+          key={i}
           custom={i}
           initial="hidden"
           animate="visible"
           variants={variants}
         >
           {typeof item === "string" ? (
-            <Text
-              key={i}
-              size={{ mobile: 16 }}
-              center
-              weight="400"
-              mt="4"
-              mb="4"
-            >
-              {item}
-            </Text>
+            <FlexContainer column centerX centerY mt="4">
+              <NumberWrapper w="25" h="25">
+                <SmallText weight="600" color="orange" center>
+                  {itemCounter++}
+                </SmallText>
+              </NumberWrapper>
+              <Text size={{ mobile: 16 }} center weight="400" mb="4">
+                {item}
+              </Text>
+            </FlexContainer>
           ) : (
             <DotSeparators key={i} />
           )}

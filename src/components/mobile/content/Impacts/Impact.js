@@ -1,7 +1,18 @@
 import * as React from "react";
+import styled from "styled-components";
 import { Title, Text } from "@typography";
 import { FlexContainer, SizedBox } from "@layouts";
 import { FadeIn } from "@animations";
+
+const SpanText = styled.span`
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 400;
+  color: rgba(237, 107, 40, 1);
+  position: relative;
+  font-size: 20px;
+  line-height: 28px;
+`;
 
 const Impacts = () => {
   return (
@@ -13,9 +24,9 @@ const Impacts = () => {
           </Title>
           <Text>
             Os fatores de auditoria{" "}
-            <strong>variam de alto impacto a baixo impacto </strong>com base no
-            quanto eles podem influenciar a forma como seu website converte os
-            visitantes em leads e clientes, desempenho, segurança e sua
+            <SpanText>variam de alto impacto a baixo impacto </SpanText>com base
+            no quanto eles podem influenciar a forma como seu website converte
+            os visitantes em leads e clientes, desempenho, segurança e sua
             classificação nos resultados dos mecanismos de busca.
           </Text>
           <SizedBox h="8" />

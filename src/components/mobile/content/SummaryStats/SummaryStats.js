@@ -7,6 +7,7 @@ import { Title, Text, SmallText } from "@typography";
 import { FlexContainer, GridFixedContainer, SizedBox } from "@layouts";
 import { FadeIn } from "@animations";
 import { useViewportInfo } from "@hooks";
+import NumberWrapper from "../../NumberWrapper/NumberWrapper";
 
 const Card = styled.div`
   border: none;
@@ -159,21 +160,33 @@ const SummaryStats = () => {
 
   return (
     <FadeIn>
-      <FlexContainer column centerY centerX pl="32" pr="32" w={width}>
+      <FlexContainer column centerY centerX pl="32" pr="32" mb="24" w={width}>
         <Title as="h3" weight="600">
-          Numeros dos elementos analizados por cada tapa do caminho do cliente
+          Numeros dos elementos analizados
         </Title>
+
+        <GridFixedContainer columns="1fr" rows="1fr" w100>
+          <CardData number={allAuditRecords} description="TOTAIS" />
+        </GridFixedContainer>
+      </FlexContainer>
+
+      <FlexContainer column centerY centerX pl="32" pr="32" mb="24" w={width}>
+        <GridFixedContainer rAuto columns=".1fr 1fr" centerY>
+          <NumberWrapper w="20" h="20">
+            <Text size={{ mobile: 14 }} weight="600" color="orange" center>
+              1
+            </Text>
+          </NumberWrapper>
+          <Title as="h4" weight="600">
+            por cada tapa da Jornada do Cliente
+          </Title>
+        </GridFixedContainer>
         <SmallText size={{ mobile: 10 }} mb="16">
           Em nessa analisi foi excluido outras 54 elementos analizados com
           referencia as possibilidade do site de ser incluido na primeira pagina
           do motor de busca
         </SmallText>
         <GridFixedContainer columns="1fr" rAuto>
-          <GridFixedContainer columns="1fr" rows="1fr" w100>
-            <CardData number={allAuditRecords} description="TOTAIS" />
-          </GridFixedContainer>
-          <SizedBox h="4" />
-
           <GridFixedContainer columns="1fr 1fr" rows="1fr" w100>
             <CardData number={allHomePage} description="PÁGINA INICIAL" />
             <CardData
@@ -206,14 +219,45 @@ const SummaryStats = () => {
               number={allConfirmationPage}
               description="PÁGINA DE CONFIRMAÇÃO"
             />
-            <CardData number={allLegal} description="LEGAL" />
           </GridFixedContainer>
-          <GridFixedContainer columns="1fr" rows="1fr" w100>
-            <CardData
-              number={allTrackingMetrics}
-              description="RASTREAMENTO E RELATÓRIOS"
-            />
-          </GridFixedContainer>
+        </GridFixedContainer>
+      </FlexContainer>
+
+      <FlexContainer column centerY centerX pl="32" pr="32" w={width} mb="24">
+        <GridFixedContainer rAuto columns=".1fr 1fr" centerY mb="16">
+          <NumberWrapper w="20" h="20">
+            <Text size={{ mobile: 14 }} weight="600" color="orange" center>
+              2
+            </Text>
+          </NumberWrapper>
+          <Title as="h4" weight="600">
+            em relacões à capacidade de monitorar e traçar estratégias para o
+            seu negócio
+          </Title>
+        </GridFixedContainer>
+
+        <GridFixedContainer columns="1fr" rows="1fr" w100>
+          <CardData
+            number={allTrackingMetrics}
+            description="RASTREAMENTO E RELATÓRIOS"
+          />
+        </GridFixedContainer>
+      </FlexContainer>
+
+      <FlexContainer column centerY centerX pl="32" pr="32" w={width} mb="24">
+        <GridFixedContainer rAuto columns=".1fr 1fr" centerY mb="16">
+          <NumberWrapper w="20" h="20">
+            <Text size={{ mobile: 14 }} weight="600" color="orange" center>
+              3
+            </Text>
+          </NumberWrapper>
+          <Title as="h4" weight="600">
+            em relacões à conformidade com as leis
+          </Title>
+        </GridFixedContainer>
+
+        <GridFixedContainer columns="1fr" rows="1fr" w100>
+          <CardData number={allLegal} description="LEGAL" />
         </GridFixedContainer>
       </FlexContainer>
     </FadeIn>

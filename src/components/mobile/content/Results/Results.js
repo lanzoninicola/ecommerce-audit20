@@ -3,11 +3,11 @@ import { useStaticQuery, graphql } from "gatsby";
 
 import { FlexContainer, SizedBox } from "@layouts";
 import { useViewportInfo } from "@hooks";
-import { camelize } from "@utils";
+import { camelize, objectKeys } from "@utils";
 
 import { parseData } from "../../../../../data/parsedData";
 import { translate } from "../../../../config/dictionary";
-import { websitePages } from "../../../../config/pages";
+import { analiticalUnits } from "../../../../config/pages";
 
 import testResults from "../../../../config/testResults";
 import GlobalTestResult from "./GlobalTestResult";
@@ -50,7 +50,7 @@ const ResultsStats = () => {
 
   let dataSectionParsed = {};
 
-  function pushSectionData(page) {
+  function pushSectionData(page, pageDescription, macroCategory) {
     let counterPassed = 0;
     let counterImprovement = 0;
     let counterNotPassed = 0;
@@ -62,6 +62,9 @@ const ResultsStats = () => {
 
     dataSectionParsed[pageEN] = {};
     dataSectionParsed[pageEN]["value_pt"] = page;
+    dataSectionParsed[pageEN]["descricao"] = pageDescription;
+    dataSectionParsed[pageEN]["macroCategoria"] = macroCategory;
+
     dataSectionParsed[pageEN]["results"] = {};
     dataSectionParsed[pageEN]["records"] = [];
 
@@ -169,8 +172,16 @@ const ResultsStats = () => {
     setSectionShown(pageEN);
   }
 
-  websitePages.map((item, i) => {
-    pushSectionData(item);
+  objectKeys(analiticalUnits).map((macroCategory, i) => {
+    objectKeys(analiticalUnits[macroCategory]).map((category) => {
+      pushSectionData(
+        analiticalUnits[macroCategory][category].name,
+        analiticalUnits[macroCategory][category].description,
+        analiticalUnits[macroCategory][category].parent
+      );
+    });
+
+    //pushSectionData(websitePages[item].name, websitePages[item].description);
   });
 
   resultTotalTestData();

@@ -32,7 +32,7 @@ const ResultsIntroduction = () => {
           </FlexContainer>
 
           <Text size={{ mobile: 12 }}>
-            Isso significa que não são necessárias atualizações, o item em uso
+            Isso significa que não são necessárias alterações, o item em uso
             está de acordo com as boas práticas de mercado
           </Text>
 
@@ -65,7 +65,7 @@ const ResultsIntroduction = () => {
             </Text>
           </FlexContainer>
           <Text size={{ mobile: 12 }}>
-            O elemento não está testado porque não disponivel no momento da
+            O elemento não está testado porque não encontrado no momento da
             verifica.
           </Text>
         </GridFixedContainer>

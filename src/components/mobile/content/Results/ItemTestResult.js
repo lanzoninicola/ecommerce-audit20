@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { Text } from "@typography";
+import { Text, SmallText } from "@typography";
 import { GridFixedContainer, FlexContainer, SizedBox } from "@layouts";
 import { colorTheme } from "@colors/lib";
 import { SVGIcon } from "@icons";
@@ -58,20 +58,24 @@ const ResultImpactIcon = ({ result }) => {
 };
 
 const StyledVoltarButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
   border: none;
-  border-radius: 50%;
+  border-radius: 20px;
   background: ${() => colorTheme("black", { opacity: 0.7 })};
-  height: 50px;
-  width: 50px;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+  height: auto;
+  width: 120px;
+
+  padding: 4px 25px 4px 25px;
 `;
 
 const VoltarButton = ({ onClick }) => {
   return (
     <StyledVoltarButton onClick={onClick}>
       <SVGIcon name="ARROW_LEFT" size="24" color="white" />
+      <SmallText color="white">Voltar</SmallText>
     </StyledVoltarButton>
   );
 };
@@ -304,8 +308,16 @@ const ItemTestResult = ({
           </Text>
         </FlexContainer>
       )}
-      <VoltarButton onClick={() => setShowDetails(false)} />
-      <FilterButton onClick={showFilterWindow} />
+      <FlexContainer
+        w100
+        row
+        stretchXS
+        style={{ position: "fixed", bottom: "20px" }}
+        pr="64"
+      >
+        <VoltarButton onClick={() => setShowDetails(false)} />
+        <FilterButton onClick={showFilterWindow} />
+      </FlexContainer>
       {showFilters && (
         <Filters
           applyFilterData={applyFilterData}

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { colorTheme } from "@colors/lib";
 import { Text } from "@typography";
-import { FlexContainer, GridFixedContainer } from "@layouts";
+import { FlexContainer, GridFixedContainer, SizedBox } from "@layouts";
 import {
   PassedIcon,
   NotPassedIcon,
@@ -12,6 +12,7 @@ import Card from "./CardWrapper";
 
 const ResultSingleCardData = ({
   title,
+  description,
   passed,
   improvement,
   notPassed,
@@ -22,11 +23,11 @@ const ResultSingleCardData = ({
 }) => {
   return (
     <Card onClick={handleDetails}>
-      <GridFixedContainer columns="1fr" rows="1fr 1fr">
+      <GridFixedContainer columns="1fr" rows="1fr .25fr">
         <Text size={{ mobile: 14 }} weight="600" pl="16">
           {title}
         </Text>
-        <GridFixedContainer columns="1fr 1fr 1fr 1fr" rows="1fr">
+        <GridFixedContainer columns="1fr 1fr 1fr 1fr" rows="1fr" mb="8">
           <FlexContainer row centerY centerX>
             <Text color="green" size={{ mobile: 18 }} pr="8" weight="800">
               {passed}
@@ -58,6 +59,9 @@ const ResultSingleCardData = ({
           </FlexContainer>
         </GridFixedContainer>
       </GridFixedContainer>
+      <Text size={{ mobile: 12 }} pl="16">
+        {description}
+      </Text>
       {children}
     </Card>
   );

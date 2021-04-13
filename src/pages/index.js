@@ -19,12 +19,13 @@ const IndexPage = () => {
   const [currentPage, setCurrentPage] = React.useState(0);
 
   const pagesQueue = [
-    // <Introduction />,
-    // <ReportExplanation />,
-    // <Impacts />,
-    // <CustomerJourney />,
-    // <SummaryStats />,
-    // <ResultsIntroduction />,
+    <Introduction />,
+    <ReportExplanation />,
+    <CustomerJourney />,
+    <Impacts />,
+
+    <SummaryStats />,
+    <ResultsIntroduction />,
     <ResultsStats />,
   ];
 
@@ -32,6 +33,7 @@ const IndexPage = () => {
     let newPage = currentPage;
     setCurrentPage(() => {
       newPage = currentPage + 1;
+      newPage = newPage > newPage.length - 1 ? currentPage : newPage;
       return newPage;
     });
   }
