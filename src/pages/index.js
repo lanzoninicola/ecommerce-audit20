@@ -1,6 +1,8 @@
 import * as React from "react";
+import styled from "styled-components";
 
 import { FlexContainer, SizedBox, GridFixedContainer } from "@layouts";
+import { ViewportInfoData } from "@layouts/lib";
 import { SmallText } from "@typography";
 
 import Introduction from "../components/mobile/content/Introduction/Introduction";
@@ -13,6 +15,8 @@ import Impacts from "../components/mobile/content/Impacts/Impact";
 import SummaryStats from "../components/mobile/content/SummaryStats/SummaryStats";
 import ResultsIntroduction from "../components/mobile/content/ResultsIntroduction/ResultsIntroduction";
 import ResultsStats from "../components/mobile/content/Results/Results";
+
+// device, size, height, width, diagonal
 
 // markup
 const IndexPage = () => {
@@ -49,6 +53,7 @@ const IndexPage = () => {
 
   return (
     <Layout>
+      {/* <ViewportInfoData /> */}
       <GridFixedContainer
         columns="1fr 1fr"
         rows="1fr"

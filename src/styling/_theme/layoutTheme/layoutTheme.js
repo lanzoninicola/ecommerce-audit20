@@ -1,7 +1,7 @@
-import breakpointsTheme from "../breakpointsTheme/breakpointsTheme"
+import breakpointsTheme from "../breakpointsTheme/breakpointsTheme";
 
-const _breakpointsTheme = breakpointsTheme()
-const devicesBreakpoints = _breakpointsTheme?.viewportDevices
+const _breakpointsTheme = breakpointsTheme();
+const devicesBreakpoints = _breakpointsTheme?.viewportDevices;
 
 function layoutTheme() {
   const _layoutTheme = {
@@ -15,6 +15,9 @@ function layoutTheme() {
       //*
 
       minDiagonal: 1190,
+      browser: {
+        navbarHeight: { mobile: 58 }, // value in "px"
+      },
     },
     space: {
       paddingLeft: { laptop: 112, tablet: 112, mobile: 32 },
@@ -40,8 +43,8 @@ function layoutTheme() {
         },
       },
     },
-  }
-  return _layoutTheme
+  };
+  return _layoutTheme;
 }
 
-export default layoutTheme
+export default layoutTheme;
