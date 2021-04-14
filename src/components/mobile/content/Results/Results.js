@@ -7,9 +7,9 @@ import { camelize, objectKeys } from "@utils";
 
 import { parseData } from "../../../../../data/parsedData";
 import { translate } from "../../../../config/dictionary";
-import { analiticalUnits } from "../../../../config/pages";
+import analiticalUnits from "../../../../config/analiticalUnits";
 
-import testResults from "../../../../config/testResults";
+import testResults from "../../../../data/enums/testResults";
 import GlobalTestResult from "./GlobalTestResult";
 import SectionTestResult from "./SectionTestResult";
 import ItemTestResult from "./ItemTestResult";

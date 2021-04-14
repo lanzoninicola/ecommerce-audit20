@@ -16,7 +16,7 @@ import {
 import { HighImpact, MediumImpact, LowImpact } from "../../Icons/Impact/Impact";
 import Filters from "../../Filter/Filters";
 import FilterButton from "../../Filter/FilterButton";
-import testResults from "../../../../config/testResults";
+import testResults from "../../../../data/enums/testResults";
 import {
   isNotUndefined,
   isNotEmptyObject,

@@ -9,8 +9,8 @@ import { colorTheme } from "@colors/lib";
 import { objectKeys } from "@utils";
 import { SVGIcon } from "@icons";
 
-import testResults from "../../../config/testResults";
-import impacts from "../../../config/impacts";
+import testResults from "../../../data/enums/testResults";
+import impacts from "../../../data/enums/impacts";
 import { PrimaryButton, PrimaryOutlineButton } from "../Buttons/Buttons";
 
 const StyledFilterWindow = styled.div`
