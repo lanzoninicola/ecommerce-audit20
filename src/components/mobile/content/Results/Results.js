@@ -13,14 +13,13 @@ const ResultsStats = () => {
   const [showRecordsOfPage, setShowRecordsOfPage] = React.useState(null);
 
   function handleDetails(page) {
-    console.log(page);
     setShowItemsList(true);
     setShowRecordsOfPage(page);
   }
 
   return (
     // <FadeIn>
-    <FlexContainer column pl="32" pr="32" w={width}>
+    <FlexContainer column pl="32" pr="32" w={width} wFixed>
       {showItemsList === false && (
         <>
           <GlobalTestResult />
@@ -31,7 +30,7 @@ const ResultsStats = () => {
       {showItemsList === true && (
         <ItemListTestResults
           recordsOfPage={showRecordsOfPage}
-          showItemsList={showItemsList}
+          setShowItemsList={setShowItemsList}
         />
       )}
     </FlexContainer>

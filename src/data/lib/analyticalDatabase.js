@@ -1,5 +1,4 @@
 import { isNotArray, error } from "@utils";
-import { object } from "prop-types";
 
 function analyticalDatabase(sourceRecords = []) {
   if (isNotArray(sourceRecords)) {

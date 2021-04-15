@@ -160,7 +160,16 @@ const SummaryStats = () => {
 
   return (
     <FadeIn>
-      <FlexContainer column centerY centerX pl="32" pr="32" mb="24" w={width}>
+      <FlexContainer
+        column
+        centerY
+        centerX
+        pl="32"
+        pr="32"
+        mb="24"
+        w={width}
+        wFixed
+      >
         <Title as="h3" weight="600">
           Numeros dos elementos analizados
         </Title>
@@ -170,7 +179,16 @@ const SummaryStats = () => {
         </GridFixedContainer>
       </FlexContainer>
 
-      <FlexContainer column centerY centerX pl="32" pr="32" mb="24" w={width}>
+      <FlexContainer
+        column
+        centerY
+        centerX
+        pl="32"
+        pr="32"
+        mb="24"
+        w={width}
+        wFixed
+      >
         <GridFixedContainer rAuto columns=".1fr 1fr" centerY>
           <NumberWrapper w="20" h="20">
             <Text size={{ mobile: 14 }} weight="600" color="orange" center>
@@ -223,7 +241,16 @@ const SummaryStats = () => {
         </GridFixedContainer>
       </FlexContainer>
 
-      <FlexContainer column centerY centerX pl="32" pr="32" w={width} mb="24">
+      <FlexContainer
+        column
+        centerY
+        centerX
+        pl="32"
+        pr="32"
+        w={width}
+        wFixed
+        mb="24"
+      >
         <GridFixedContainer rAuto columns=".1fr 1fr" centerY mb="16">
           <NumberWrapper w="20" h="20">
             <Text size={{ mobile: 14 }} weight="600" color="orange" center>
@@ -244,7 +271,16 @@ const SummaryStats = () => {
         </GridFixedContainer>
       </FlexContainer>
 
-      <FlexContainer column centerY centerX pl="32" pr="32" w={width} mb="24">
+      <FlexContainer
+        column
+        centerY
+        centerX
+        pl="32"
+        pr="32"
+        w={width}
+        wFixed
+        mb="24"
+      >
         <GridFixedContainer rAuto columns=".1fr 1fr" centerY mb="16">
           <NumberWrapper w="20" h="20">
             <Text size={{ mobile: 14 }} weight="600" color="orange" center>

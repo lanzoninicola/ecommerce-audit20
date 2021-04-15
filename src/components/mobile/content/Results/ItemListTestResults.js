@@ -27,8 +27,6 @@ const ItemListTestResults = ({ recordsOfPage, setShowItemsList }) => {
   }
 
   function applyFilterData(filters = {}) {
-    console.log("setFilter data fired", filters);
-
     let nextFilterData = { pagina: recordsOfPage };
 
     objectKeys(filters).forEach((filter) => {

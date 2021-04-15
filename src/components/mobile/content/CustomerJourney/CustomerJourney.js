@@ -44,14 +44,6 @@ const items = [
   1,
   1,
   "confirmar a compra",
-  // 1,
-  // 1,
-  // 1,
-  // "rastreamento e métricas",
-  // 1,
-  // 1,
-  // 1,
-  // "legal",
 ];
 
 const CustomerJourney = () => {
@@ -70,7 +62,7 @@ const CustomerJourney = () => {
   let itemCounter = 1;
 
   return (
-    <FlexContainer column centerY centerX pl="32" pr="32" w={width}>
+    <FlexContainer column centerY centerX pl="32" pr="32">
       <Title as="h3" weight="600" center>
         Representação do
       </Title>

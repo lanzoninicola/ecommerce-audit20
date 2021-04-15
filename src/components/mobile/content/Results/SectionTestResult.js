@@ -1,11 +1,23 @@
 import * as React from "react";
 
 import { Title, Text } from "@typography";
-import { GridFixedContainer } from "@layouts";
+import {
+  GridFixedContainer,
+  GridFluidContainer,
+  FlexContainer,
+} from "@layouts";
 
 import DataContext from "../../../../data/DataContext";
 import analyticalUnits from "../../../../config/analyticalUnits";
 import ResultCard from "../../Cards/ResultCard";
+
+const SectionTitle = ({ children }) => {
+  return (
+    <Title as="h4" weight="600" mb="16">
+      {children}
+    </Title>
+  );
+};
 
 const SectionTestResult = ({ handleDetails }) => {
   const dataContext = React.useContext(DataContext);
@@ -50,32 +62,38 @@ const SectionTestResult = ({ handleDetails }) => {
   }
 
   return (
-    <div>
-      <Title as="h4" weight="600" mb="16">
-        Resultado para cada tapa de Jornada do Cliente
-      </Title>
+    <GridFluidContainer>
+      <FlexContainer mb="32">
+        <SectionTitle>
+          Resultado para cada tapa de Jornada do Cliente
+        </SectionTitle>
 
-      {listPagesOfJornadaDoCliente.map((pageName, index) => {
-        return renderResultCard(pageName, index);
-      })}
+        {listPagesOfJornadaDoCliente.map((pageName, index) => {
+          return renderResultCard(pageName, index);
+        })}
+      </FlexContainer>
 
-      <Title as="h4" weight="600" mb="16">
-        Resultado com referência a capacidade de analisar o comportamento do
-        visitante
-      </Title>
+      <FlexContainer mb="32">
+        <SectionTitle>
+          Resultado com referência a capacidade de analisar o comportamento do
+          visitante
+        </SectionTitle>
 
-      {listPagesOfTrackingMetrics.map((pageName, index) => {
-        return renderResultCard(pageName, index);
-      })}
+        {listPagesOfTrackingMetrics.map((pageName, index) => {
+          return renderResultCard(pageName, index);
+        })}
+      </FlexContainer>
 
-      <Title as="h4" weight="600" mb="16">
-        Resultado com referência a conformidade as leis
-      </Title>
+      <FlexContainer mb="32">
+        <SectionTitle>
+          Resultado com referência a conformidade as leis
+        </SectionTitle>
 
-      {listPagesOfLegal.map((pageName, index) => {
-        return renderResultCard(pageName, index);
-      })}
-    </div>
+        {listPagesOfLegal.map((pageName, index) => {
+          return renderResultCard(pageName, index);
+        })}
+      </FlexContainer>
+    </GridFluidContainer>
   );
 };
 
