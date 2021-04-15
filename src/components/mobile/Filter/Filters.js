@@ -220,8 +220,8 @@ const Filters = ({ applyFilterData, showFilterWindow }) => {
             onClick={() => {
               if (filterTestResultValue || filterImpactValue) {
                 applyFilterData({
-                  testResult: filterTestResultValue,
-                  impact: filterImpactValue,
+                  resultado: filterTestResultValue,
+                  impacto: filterImpactValue,
                 });
               }
 

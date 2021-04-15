@@ -1,12 +1,13 @@
-import analiticalUnits from "../../config/analiticalUnits";
+import analyticalUnits from "../../config/analyticalUnits";
 import dictionary from "../../config/dictionary";
 import impacts from "../enums/impacts";
 import testResult from "../enums/testResults";
+import { camelize } from "@utils";
 
-const _analiticalUnits = analiticalUnits();
+const _analyticalUnits = analyticalUnits();
 const _dictionary = dictionary();
 
-function auditRecord(auditRecordModel) {
+function auditRecordEntity(auditRecordModel) {
   const _auditRecord = { ...auditRecordModel };
 
   function _translateAndCamelize(pageName) {
@@ -17,12 +18,12 @@ function auditRecord(auditRecordModel) {
 
   function getAnaliticalUnitOfPage() {
     const pageNameENG = _translateAndCamelize(_auditRecord["pagina"]);
-    return _analiticalUnits.getAnaliticalUnitOfPage(pageNameENG);
+    return _analyticalUnits.getAnalyticalUnitOfPage(pageNameENG);
   }
 
   function getPageDescription() {
     const pageNameENG = _translateAndCamelize(_auditRecord["pagina"]);
-    return _analiticalUnits.getDescription(pageNameENG);
+    return _analyticalUnits.getDescriptionOfPage(pageNameENG);
   }
 
   function isHighImpact() {
@@ -56,7 +57,7 @@ function auditRecord(auditRecordModel) {
   return {
     ..._auditRecord,
     macroCategory: getAnaliticalUnitOfPage(),
-    categoryDescription: getPageDescription(),
+    paginaDescription: getPageDescription(),
     isHighImpact: isHighImpact(),
     isMediumImpact: isMediumImpact(),
     isLowImpact: isLowImpact(),
@@ -67,4 +68,4 @@ function auditRecord(auditRecordModel) {
   };
 }
 
-export default auditRecord;
+export default auditRecordEntity;

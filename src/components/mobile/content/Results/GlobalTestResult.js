@@ -1,4 +1,5 @@
 import * as React from "react";
+import DataContext from "../../../../data/DataContext";
 
 import { Title, Text } from "@typography";
 import { FlexContainer, GridFixedContainer, SizedBox } from "@layouts";
@@ -8,13 +9,15 @@ import ImprovementCard from "../../Cards/ImprovementCard";
 import NotPassedCard from "../../Cards/NotPassedCard";
 import NotTestedCard from "../../Cards/NotTestedCard";
 
-const GlobalTestResult = ({
-  total,
-  passed,
-  notPassed,
-  improvement,
-  notTested,
-}) => {
+const GlobalTestResult = () => {
+  const dataContext = React.useContext(DataContext);
+
+  const total = dataContext.totalRecords();
+  const passed = dataContext.totalTestPassed();
+  const notPassed = dataContext.totalTestNotPassed();
+  const improvement = dataContext.totalTestImprovement();
+  const notTested = dataContext.totalTestNotTested();
+
   return (
     <>
       <Title as="h4" weight="600" mb="16">

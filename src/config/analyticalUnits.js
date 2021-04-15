@@ -1,9 +1,9 @@
 import websitePage from "../data/enums/pages";
 
-function analiticalUnits() {
-  const _analiticalUnits = {
+function analyticalUnits() {
+  const _analyticalUnits = {
     customerJourney: {
-      homepage: {
+      homePage: {
         name: websitePage.HOME_PAGE,
         description:
           "A página inicial pode ser pensada como a vitrine para seu site de comércio eletrônico. Ela precisa de refletir quem você é e o que você vende. É aqui que você desenha e envolve seus visitantes para veja e entregar seus produtos.",
@@ -47,7 +47,7 @@ function analiticalUnits() {
       },
     },
     analytics: {
-      trackMetrics: {
+      trackingMetrics: {
         name: websitePage.TRACKING_METRICS,
         description:
           "Não se pode medir o que não se rastreia. Se não se pode medir, não se pode melhorar. Use a análise para rastrear e analisar as percepções dos visitantes. Estabeleça metas para medir e otimizar o desempenho. Aproveite-os todos juntos para impulsionar o crescimento e aumentar sua receita",
@@ -65,29 +65,67 @@ function analiticalUnits() {
     },
   };
 
-  function getAnaliticalUnitOfPage(pageName) {
-    Object.keys(_analiticalUnits).forEach((item) => {
-      if (typeof _analiticalUnits[item][pageName] === "object") {
-        return item;
-      }
-    });
+  function getAnalyticalUnitList() {
+    return Object.keys(_analyticalUnits).map(
+      (analyticalUnit) => analyticalUnit
+    );
   }
 
-  function getDescription(pageName) {
-    Object.keys(_analiticalUnits).forEach((item) => {
-      return _analiticalUnits[item][pageName].description;
+  function getListPagesOfAnalyticalUnit(analyticalUnit) {
+    return Object.keys(_analyticalUnits[analyticalUnit]).map(
+      (page) => _analyticalUnits[analyticalUnit][page].name
+    );
+  }
+
+  function getAnalyticalUnitOfPage(pageName) {
+    let macroCategory = "";
+    Object.keys(_analyticalUnits).forEach((item) => {
+      if (typeof _analyticalUnits[item][pageName] === "object") {
+        macroCategory = item;
+      }
     });
+
+    return macroCategory;
+  }
+
+  function getNameOfPage(pageName) {
+    let name = "";
+    Object.keys(_analyticalUnits).forEach((item) => {
+      if (_analyticalUnits[item][pageName]?.name) {
+        name = _analyticalUnits[item][pageName].name;
+        console.log(name);
+      }
+    });
+
+    return name;
+  }
+
+  function getDescriptionOfPage(pageName) {
+    let description = "";
+    Object.keys(_analyticalUnits).forEach((unit) => {
+      Object.keys(_analyticalUnits[unit]).forEach((page) => {
+        if (_analyticalUnits[unit][page].name === pageName) {
+          description = _analyticalUnits[unit][page].description;
+        }
+      });
+    });
+
+    return description;
   }
 
   function all() {
-    return _analiticalUnits;
+    return _analyticalUnits;
   }
 
   return {
     all: () => all(),
-    getAnaliticalUnitOfPage: (pageName) => getAnaliticalUnitOfPage(pageName),
-    getDescription: (pageName) => getDescription(pageName),
+    getAnalyticalUnitList: () => getAnalyticalUnitList(),
+    getListPagesOfAnalyticalUnit: (analyticalUnit) =>
+      getListPagesOfAnalyticalUnit(analyticalUnit),
+    getAnalyticalUnitOfPage: (pageName) => getAnalyticalUnitOfPage(pageName),
+    getDescriptionOfPage: (pageName) => getDescriptionOfPage(pageName),
+    getNameOfPage: (pageName) => getNameOfPage(pageName),
   };
 }
 
-export default analiticalUnits;
+export default analyticalUnits;

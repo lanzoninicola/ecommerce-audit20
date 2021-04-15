@@ -49,9 +49,9 @@ function dictionary() {
   function translate(term, options = { lang: "en" }) {
     let translation = "";
 
-    _dictionary.map((item, i) => {
+    _dictionary.forEach((item, i) => {
       if (item.pt.toLowerCase() == term.toLowerCase()) {
-        translation = dictionary[i][options.lang];
+        translation = _dictionary[i][options.lang];
       }
     });
 
@@ -67,3 +67,5 @@ function dictionary() {
     translate: (term, options) => translate(term, options),
   };
 }
+
+export default dictionary;

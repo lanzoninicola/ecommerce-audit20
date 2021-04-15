@@ -13,19 +13,20 @@ import Impacts from "../components/mobile/content/Impacts/Impact";
 import SummaryStats from "../components/mobile/content/SummaryStats/SummaryStats";
 import ResultsIntroduction from "../components/mobile/content/ResultsIntroduction/ResultsIntroduction";
 import ResultsStats from "../components/mobile/content/Results/Results";
+import ResultsTest from "../components/mobile/content/Results/result_test";
 
 // markup
 const IndexPage = () => {
   const [currentPage, setCurrentPage] = React.useState(0);
 
   const pagesQueue = [
-    <Introduction />,
-    <ReportExplanation />,
-    <CustomerJourney />,
-    <Impacts />,
+    // <Introduction />,
+    // <ReportExplanation />,
+    // <CustomerJourney />,
+    // <Impacts />,
 
-    <SummaryStats />,
-    <ResultsIntroduction />,
+    // <SummaryStats />,
+    // <ResultsIntroduction />,
     <ResultsStats />,
   ];
 
