@@ -18,6 +18,14 @@ const NotTestetCard = ({ data }) => {
         </Text>
         <SizedBox h="4" />
         <NotTestedIcon />
+        <SizedBox h="4" />
+        <Text
+          weight="600"
+          size={{ mobile: 12 }}
+          color={colorTheme("black", { opacity: 0.8 })}
+        >
+          Não Testado
+        </Text>
       </FlexContainer>
     </Card>
   );

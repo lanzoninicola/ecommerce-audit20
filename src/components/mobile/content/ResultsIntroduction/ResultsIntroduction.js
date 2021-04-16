@@ -2,6 +2,7 @@ import * as React from "react";
 import { Title, Text } from "@typography";
 import { FlexContainer, GridFixedContainer } from "@layouts";
 import { FadeIn } from "@animations";
+import { colorTheme } from "@colors/lib";
 
 import {
   PassedIcon,
@@ -23,10 +24,11 @@ const ResultsIntroduction = () => {
             representados com os seguintes valores:
           </Text>
         </FlexContainer>
-        <GridFixedContainer columns="0.1fr 0.1fr 1fr" rows="1fr" gap="6">
-          <PassedIcon />
-          <FlexContainer row centerX centerY h100>
-            <Text weight="600" size={{ mobile: 14 }}>
+        <GridFixedContainer columns="0.50fr 1fr" rows="1fr" gap="6" mb="24">
+          <FlexContainer column centerX centerY>
+            <PassedIcon />
+
+            <Text weight="600" size={{ mobile: 14 }} color="green">
               Passou
             </Text>
           </FlexContainer>
@@ -35,10 +37,12 @@ const ResultsIntroduction = () => {
             Isso significa que não são necessárias alterações, o item em uso
             está de acordo com as boas práticas de mercado
           </Text>
+        </GridFixedContainer>
 
-          <ImprovementIcon />
-          <FlexContainer row centerX centerY h100>
-            <Text weight="600" size={{ mobile: 14 }}>
+        <GridFixedContainer columns="0.50fr 1fr" rows="1fr" gap="6" mb="24">
+          <FlexContainer column centerX centerY>
+            <ImprovementIcon />
+            <Text weight="600" size={{ mobile: 14 }} color="yellow" center>
               Oportunidade de Melhorar
             </Text>
           </FlexContainer>
@@ -46,9 +50,12 @@ const ResultsIntroduction = () => {
             O elemento em uso está parcialmente de acordo com as boas práticas
             de mercado, ele precisa ser ainda melhorado.
           </Text>
-          <NotPassedIcon />
-          <FlexContainer row centerX centerY h100>
-            <Text weight="600" size={{ mobile: 14 }}>
+        </GridFixedContainer>
+
+        <GridFixedContainer columns="0.50fr 1fr" rows="1fr" gap="6" mb="24">
+          <FlexContainer column centerX centerY>
+            <NotPassedIcon />
+            <Text weight="600" size={{ mobile: 14 }} color="red">
               Não Passou
             </Text>
           </FlexContainer>
@@ -57,10 +64,16 @@ const ResultsIntroduction = () => {
             O elemento não está de acordo com as boas práticas de mercado.
             Necessidade de nova implementação ou mudança radical.
           </Text>
+        </GridFixedContainer>
 
-          <NotTestedIcon />
-          <FlexContainer row centerX centerY h100>
-            <Text weight="600" size={{ mobile: 14 }}>
+        <GridFixedContainer columns="0.50fr 1fr" rows="1fr" gap="6" mb="24">
+          <FlexContainer column centerX centerY>
+            <NotTestedIcon />
+            <Text
+              weight="600"
+              size={{ mobile: 14 }}
+              color={colorTheme("black", { opacity: 0.8 })}
+            >
               Não Testado
             </Text>
           </FlexContainer>

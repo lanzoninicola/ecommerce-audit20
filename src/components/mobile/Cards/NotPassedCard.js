@@ -13,6 +13,10 @@ const NotPassedCard = ({ data }) => {
         </Text>
         <SizedBox h="4" />
         <NotPassedIcon />
+        <SizedBox h="4" />
+        <Text weight="600" size={{ mobile: 12 }} color="red">
+          Não Passou
+        </Text>
       </FlexContainer>
     </Card>
   );

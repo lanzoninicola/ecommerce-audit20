@@ -27,7 +27,6 @@ const IndexPage = () => {
     <ReportExplanation />,
     <CustomerJourney />,
     <Impacts />,
-
     <SummaryStats />,
     <ResultsIntroduction />,
     <ResultsStats />,
@@ -37,7 +36,7 @@ const IndexPage = () => {
     let newPage = currentPage;
     setCurrentPage(() => {
       newPage = currentPage + 1;
-      newPage = newPage > newPage.length - 1 ? currentPage : newPage;
+      newPage = newPage > pagesQueue.length - 1 ? currentPage : newPage;
       return newPage;
     });
   }
