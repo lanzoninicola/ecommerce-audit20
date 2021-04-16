@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import AuthContext from "../components/Auth/context/AuthContext";
 
 import { FlexContainer, SizedBox, GridFixedContainer } from "@layouts";
 import { ViewportInfoData } from "@layouts/lib";
@@ -15,23 +15,23 @@ import Impacts from "../components/mobile/content/Impacts/Impact";
 import SummaryStats from "../components/mobile/content/SummaryStats/SummaryStats";
 import ResultsIntroduction from "../components/mobile/content/ResultsIntroduction/ResultsIntroduction";
 import ResultsStats from "../components/mobile/content/Results/Results";
-import Passcode from "../components/PassCode/PassCode";
+import { navigate } from "gatsby-link";
 
 // device, size, height, width, diagonal
 
 // markup
-const IndexPage = () => {
+const Auditoria = () => {
+  const authContext = React.useContext(AuthContext);
   const [currentPage, setCurrentPage] = React.useState(0);
 
   const pagesQueue = [
-    <Passcode />,
-    // <Introduction />,
-    // <ReportExplanation />,
-    // <CustomerJourney />,
-    // <Impacts />,
-    // <SummaryStats />,
-    // <ResultsIntroduction />,
-    // <ResultsStats />,
+    <Introduction />,
+    <ReportExplanation />,
+    <CustomerJourney />,
+    <Impacts />,
+    <SummaryStats />,
+    <ResultsIntroduction />,
+    <ResultsStats />,
   ];
 
   function nextPage() {
@@ -51,6 +51,18 @@ const IndexPage = () => {
       return newPage;
     });
   }
+
+  function isAuthenticated() {
+    console.log(authContext);
+
+    if (authContext.authStatus === "anonymous") {
+      navigate("/");
+    }
+  }
+
+  React.useEffect(() => {
+    isAuthenticated();
+  }, []);
 
   return (
     <Layout>
@@ -80,4 +92,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default Auditoria;
