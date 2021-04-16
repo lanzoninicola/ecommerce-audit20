@@ -1,17 +1,26 @@
+// Initialize dotenv
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`, // or '.env'
+});
+
+let credentials = require("./gsheet/credentials.json");
+let spreadsheetId = process.env.GSHEET_SPREADSHEET_ID;
+let private_key = process.env.GSHEET_PRIVATE_KEY;
+credentials = { ...credentials, private_key: private_key };
+
+console.log(spreadsheetId);
+
 module.exports = {
   siteMetadata: {
-    title: 'no title',
+    title: "no title",
   },
   plugins: [
-      {
+    {
       resolve: "gatsby-source-google-sheets",
       options: {
-		// Testing file
-        // spreadsheetId: "1JRNetI-yJTmWiAlqY3mAZdYzij-DG-H0",
-        // worksheetTitle: "Sheet1",
-		spreadsheetId: "1RaP0OzThdR8b4dg7TvOpFU9JmMwHSVQ7GEAgm9Lh_wE",
+        spreadsheetId: spreadsheetId,
         worksheetTitle: "Relatorio",
-        credentials: require("./gsheet/client_secret.json"),
+        credentials: credentials,
       },
     },
     `gatsby-plugin-react-helmet`,
@@ -41,4 +50,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};
