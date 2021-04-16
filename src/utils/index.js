@@ -30,7 +30,7 @@ import removePropsFromObject from "./removePropsFromObject";
 import randomItemFromArray from "./randomItemFromArray";
 import isBoolean from "./isBoolean";
 import paginator from "./paginator";
-import renderTextUpto from "./renderTextUpto";
+import renderTextUpto from "./renderTextUpTo";
 import camelize from "./camelize";
 
 export {
