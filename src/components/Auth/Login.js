@@ -11,6 +11,7 @@ import Card from "../mobile/Cards/CardWrapper";
 
 import PasscodeButton from "./PasscodeButton";
 import LoginEntity from "./entity/LoginEntity";
+import NavAnchor from "../../styling/navigation/navAnchor";
 
 const loginBrain = LoginEntity();
 
@@ -91,9 +92,9 @@ const Login = () => {
             Passcode
           </Text>
           {inputPasscode.length > 0 && (
-            <SmallText mb="16" center>
+            <Text mb="16" size={{ mobile: 16, laptop: 20 }} center ls="2">
               {inputPasscode.join("")}
-            </SmallText>
+            </Text>
           )}
 
           <GridFixedContainer columns="1fr 1fr 1fr" rAuto w100 centerX centerY>
@@ -142,8 +143,13 @@ const Login = () => {
           </FlexContainer>
         </Card>
         <FlexContainer column centerY>
-          <SmallText>Website developed by Lanzoni Nicola</SmallText>
-          <SmallText>lanzoni.nicola@gmail.com</SmallText>
+          <SmallText>
+            Website developed by{" "}
+            <span style={{ fontWeight: "bold" }}>Lanzoni Nicola</span>
+          </SmallText>
+          <NavAnchor to={{ value: "mailto:lanzoni.nicola@gmail.com" }}>
+            <SmallText>lanzoni.nicola@gmail.com</SmallText>
+          </NavAnchor>
         </FlexContainer>
       </GridFixedContainer>
     </FlexContainer>

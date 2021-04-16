@@ -1,8 +1,14 @@
 import * as React from "react";
+import { useLocalStorage } from "@hooks";
 import AuthContext from "./AuthContext";
 
 const AuthProvider = ({ children }) => {
-  const [authStatus, setAuthStatus] = React.useState("anonymous");
+  //   const [authStatus, setAuthStatus] = React.useState("anonymous");
+  const [authStatus, setAuthStatus] = useLocalStorage(
+    "auditoria_authStatus",
+    "anonymous",
+    30
+  );
 
   function shouldAuthenticate() {
     setAuthStatus("authenticated");

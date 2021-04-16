@@ -1,4 +1,5 @@
 import * as React from "react";
+import { navigate } from "gatsby-link";
 import AuthContext from "../components/Auth/context/AuthContext";
 
 import { FlexContainer, SizedBox, GridFixedContainer } from "@layouts";
@@ -15,7 +16,8 @@ import Impacts from "../components/mobile/content/Impacts/Impact";
 import SummaryStats from "../components/mobile/content/SummaryStats/SummaryStats";
 import ResultsIntroduction from "../components/mobile/content/ResultsIntroduction/ResultsIntroduction";
 import ResultsStats from "../components/mobile/content/Results/Results";
-import { navigate } from "gatsby-link";
+
+import { useLocalStorage } from "@hooks";
 
 // device, size, height, width, diagonal
 

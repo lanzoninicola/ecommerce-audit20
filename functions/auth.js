@@ -3,8 +3,6 @@ exports.handler = async function (event, context) {
   const { userPasscode } = JSON.parse(event.body);
   const _userPasscode = userPasscode.trim();
 
-  console.log(serverPasscode);
-
   if (serverPasscode === _userPasscode) {
     return {
       statusCode: 200,
