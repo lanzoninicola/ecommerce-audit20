@@ -7,7 +7,13 @@ import NumberWrapper from "../../NumberWrapper/NumberWrapper";
 
 const ReportExplanation = () => {
   return (
-    <FlexContainer column centerY centerX pl="32" pr="32">
+    <FlexContainer
+      column
+      centerY
+      centerX
+      pl={{ mobile: "32", laptop: "192" }}
+      pr={{ mobile: "32", laptop: "192" }}
+    >
       <FadeIn>
         <SizedBox>
           <Title as="h3" weight="600" mb="16">
@@ -16,7 +22,7 @@ const ReportExplanation = () => {
 
           <Text>Este relatório inclui uma análise de:</Text>
           <SizedBox h="16" />
-          <GridFixedContainer columns=".1fr 1fr" rAuto mb="8">
+          <GridFixedContainer columns=".1fr 1fr" rAuto mb="16" centerX centerY>
             <NumberWrapper w="30" h="30">
               <Text weight="600" color="orange" center>
                 1
@@ -28,7 +34,7 @@ const ReportExplanation = () => {
               checkout, pós-venda
             </Text>
           </GridFixedContainer>
-          <GridFixedContainer columns=".1fr 1fr" rAuto mb="8">
+          <GridFixedContainer columns=".1fr 1fr" rAuto mb="16" centerX centerY>
             <NumberWrapper w="30" h="30">
               <Text weight="600" color="orange" center>
                 2
@@ -40,7 +46,7 @@ const ReportExplanation = () => {
               estratégias para o seu negócio.
             </Text>
           </GridFixedContainer>
-          <GridFixedContainer columns=".1fr 1fr" rAuto mb="8">
+          <GridFixedContainer columns=".1fr 1fr" rAuto mb="16" centerX centerY>
             <NumberWrapper w="30" h="30">
               <Text weight="600" color="orange" center>
                 3

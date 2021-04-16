@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import { Size } from "@layouts";
 
 import { colorTheme } from "@colors/lib";
 
 const NumberWrapper = styled.div`
+  ${Size}
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -11,14 +13,6 @@ const NumberWrapper = styled.div`
   border-color: ${() => colorTheme("orange")};
   border-radius: 50%;
   background: none;
-  height: ${({ h, height }) => {
-    const _height = h || height;
-    if (_height) return `${_height}px`;
-  }};
-  width: ${({ w, width }) => {
-    const _width = w || width;
-    if (_width) return `${_width}px`;
-  }};
   margin-bottom: 4px;
 `;
 

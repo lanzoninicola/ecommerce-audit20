@@ -14,13 +14,14 @@ const Card = styled.div`
   border-radius: 8px;
   background: ${() => colorTheme("white")};
   width: 100%;
+  max-width: 300px;
   box-shadow: ${({ noShadow }) => {
     if (noShadow) return null;
     return `rgba(0, 6, 36, 0) 0px 26px 24px -16px,
     rgba(0, 6, 36, 0.3) 0px 16px 24px -18px,
     rgba(0, 6, 36, 0.07) 0px 0px 10px 0px;`;
   }};
-  padding: 4px;
+  padding: 1em;
   margin-top: 4px;
   margin-bottom: 4px;
 `;
@@ -29,7 +30,12 @@ const CardData = ({ number, description }) => {
   return (
     <Card>
       <FlexContainer column centerX centerY>
-        <Text center color="orange" weight="600" size={{ mobile: 32 }}>
+        <Text
+          center
+          color="orange"
+          weight="600"
+          size={{ mobile: 32, laptop: 48 }}
+        >
           {number}
         </Text>
         <SmallText size={{ mobile: 10 }} center weight="600">
@@ -41,9 +47,9 @@ const CardData = ({ number, description }) => {
 };
 
 const SummaryStats = () => {
-  const { width } = useViewportInfo();
+  const { device } = useViewportInfo();
   const data = useStaticQuery(graphql`
-    query allAuditRecords {
+    query allAuditRecords2 {
       allAuditRecords: allGoogleSheetRelatorioRow {
         edges {
           node {
@@ -159,144 +165,144 @@ const SummaryStats = () => {
   const allTrackingMetrics = data.allTrackingMetrics.edges.length;
 
   return (
-    <FadeIn>
-      <FlexContainer
-        column
-        centerY
-        centerX
-        pl="32"
-        pr="32"
-        mb="24"
-        w={width}
-        wFixed
-      >
-        <Title as="h3" weight="600">
-          Numeros dos elementos analizados
-        </Title>
-
-        <GridFixedContainer columns="1fr" rows="1fr" w100>
-          <CardData number={allAuditRecords} description="TOTAIS" />
-        </GridFixedContainer>
-      </FlexContainer>
-
-      <FlexContainer
-        column
-        centerY
-        centerX
-        pl="32"
-        pr="32"
-        mb="24"
-        w={width}
-        wFixed
-      >
-        <GridFixedContainer rAuto columns=".1fr 1fr" centerY>
-          <NumberWrapper w="20" h="20">
-            <Text size={{ mobile: 14 }} weight="600" color="orange" center>
-              1
-            </Text>
-          </NumberWrapper>
-          <Title as="h4" weight="600">
-            por cada tapa da Jornada do Cliente
+    <GridFixedContainer
+      columns={{
+        mobile: "1fr",
+        laptop: ".50fr 1fr .50fr",
+      }}
+      pl={{ mobile: "32" }}
+      pr={{ mobile: "32" }}
+      rAuto
+      w100v
+    >
+      <SizedBox />
+      <FadeIn>
+        <FlexContainer column mb="36">
+          <Title as="h3" weight="600" mb="16" left>
+            Numeros dos elementos analizados
           </Title>
-        </GridFixedContainer>
-        <SmallText size={{ mobile: 10 }} mb="16">
-          Em nessa analisi foi excluido outras 54 elementos analizados com
-          referencia as possibilidade do site de ser incluido na primeira pagina
-          do motor de busca
-        </SmallText>
-        <GridFixedContainer columns="1fr" rAuto>
-          <GridFixedContainer columns="1fr 1fr" rows="1fr" w100>
-            <CardData number={allHomePage} description="PÁGINA INICIAL" />
-            <CardData
-              number={allFerramentaDeBusca}
-              description="FERRAMENTA DE BUSCA"
-            />
+          <Text size={{ mobile: 14, laptop: 16 }} mb="32">
+            Em nessa analisi foi excluido outras 54 elementos analizados com
+            referencia as possibilidade do site de ser incluido na primeira
+            pagina do motor de busca
+          </Text>
+          <GridFixedContainer rAuto columns=".05fr 1fr" centerY w100>
+            <NumberWrapper
+              w={{ mobile: 20, laptop: 40 }}
+              h={{ mobile: 20, laptop: 40 }}
+            >
+              <Text size={{ mobile: 14 }} weight="600" color="orange" center>
+                1
+              </Text>
+            </NumberWrapper>
+            <Title as="h4" weight="600">
+              totais dos elementos
+            </Title>
           </GridFixedContainer>
 
-          <GridFixedContainer columns="1fr 1fr" rows="1fr" w100>
-            <CardData
-              number={allCategoryProduct}
-              description="LISTA DE PRODUTOS DE UMA CATEGORIA"
-            />
-            <CardData
-              number={allCategories}
-              description="PÁGINAS DA CATEGORIA DE PRODUTOS"
-            />
+          <GridFixedContainer columns="1fr" rows="1fr" w100 centerX centerY>
+            <CardData number={allAuditRecords} description="TOTAIS" />
+          </GridFixedContainer>
+        </FlexContainer>
+
+        <FlexContainer column centerY centerX mb="24">
+          <GridFixedContainer rAuto columns=".05fr 1fr" centerY w100>
+            <NumberWrapper
+              w={{ mobile: 20, laptop: 40 }}
+              h={{ mobile: 20, laptop: 40 }}
+            >
+              <Text size={{ mobile: 14 }} weight="600" color="orange" center>
+                2
+              </Text>
+            </NumberWrapper>
+            <Title as="h4" weight="600">
+              por cada tapa da Jornada do Cliente
+            </Title>
           </GridFixedContainer>
 
-          <GridFixedContainer columns="1fr 1fr" rows="1fr" w100>
-            <CardData
-              number={allProductDetails}
-              description="PÁGINA DE DETALHES DO PRODUTO"
-            />
-            <CardData number={allCarrinho} description="CARRINHO" />
+          <GridFixedContainer columns="1fr" rAuto>
+            <GridFixedContainer columns="1fr 1fr" rows="1fr" w100>
+              <CardData number={allHomePage} description="PÁGINA INICIAL" />
+              <CardData
+                number={allFerramentaDeBusca}
+                description="FERRAMENTA DE BUSCA"
+              />
+            </GridFixedContainer>
+
+            <GridFixedContainer columns="1fr 1fr" rows="1fr" w100>
+              <CardData
+                number={allCategoryProduct}
+                description="LISTA DE PRODUTOS DE UMA CATEGORIA"
+              />
+              <CardData
+                number={allCategories}
+                description="PÁGINAS DA CATEGORIA DE PRODUTOS"
+              />
+            </GridFixedContainer>
+
+            <GridFixedContainer columns="1fr 1fr" rows="1fr" w100>
+              <CardData
+                number={allProductDetails}
+                description="PÁGINA DE DETALHES DO PRODUTO"
+              />
+              <CardData number={allCarrinho} description="CARRINHO" />
+            </GridFixedContainer>
+
+            <GridFixedContainer columns="1fr 1fr" rows="1fr" w100>
+              <CardData
+                number={allConfirmationPage}
+                description="PÁGINA DE CONFIRMAÇÃO"
+              />
+            </GridFixedContainer>
+          </GridFixedContainer>
+        </FlexContainer>
+
+        <FlexContainer column centerY centerX mb="24">
+          <GridFixedContainer rAuto columns=".05fr 1fr" centerY mb="16" w100>
+            <NumberWrapper
+              w={{ mobile: 20, laptop: 40 }}
+              h={{ mobile: 20, laptop: 40 }}
+            >
+              <Text size={{ mobile: 14 }} weight="600" color="orange" center>
+                3
+              </Text>
+            </NumberWrapper>
+            <Title as="h4" weight="600">
+              em relacões à capacidade de monitorar e traçar estratégias para o
+              seu negócio
+            </Title>
           </GridFixedContainer>
 
-          <GridFixedContainer columns="1fr 1fr" rows="1fr" w100>
+          <GridFixedContainer columns="1fr" rows="1fr" w100 centerX centerY>
             <CardData
-              number={allConfirmationPage}
-              description="PÁGINA DE CONFIRMAÇÃO"
+              number={allTrackingMetrics}
+              description="RASTREAMENTO E RELATÓRIOS"
             />
           </GridFixedContainer>
-        </GridFixedContainer>
-      </FlexContainer>
+        </FlexContainer>
 
-      <FlexContainer
-        column
-        centerY
-        centerX
-        pl="32"
-        pr="32"
-        w={width}
-        wFixed
-        mb="24"
-      >
-        <GridFixedContainer rAuto columns=".1fr 1fr" centerY mb="16">
-          <NumberWrapper w="20" h="20">
-            <Text size={{ mobile: 14 }} weight="600" color="orange" center>
-              2
-            </Text>
-          </NumberWrapper>
-          <Title as="h4" weight="600">
-            em relacões à capacidade de monitorar e traçar estratégias para o
-            seu negócio
-          </Title>
-        </GridFixedContainer>
+        <FlexContainer column centerY centerX mb="24">
+          <GridFixedContainer rAuto columns=".05fr 1fr" centerY mb="16" w100>
+            <NumberWrapper
+              w={{ mobile: 20, laptop: 40 }}
+              h={{ mobile: 20, laptop: 40 }}
+            >
+              <Text size={{ mobile: 14 }} weight="600" color="orange" center>
+                4
+              </Text>
+            </NumberWrapper>
+            <Title as="h4" weight="600">
+              em relacões à conformidade com as leis
+            </Title>
+          </GridFixedContainer>
 
-        <GridFixedContainer columns="1fr" rows="1fr" w100>
-          <CardData
-            number={allTrackingMetrics}
-            description="RASTREAMENTO E RELATÓRIOS"
-          />
-        </GridFixedContainer>
-      </FlexContainer>
-
-      <FlexContainer
-        column
-        centerY
-        centerX
-        pl="32"
-        pr="32"
-        w={width}
-        wFixed
-        mb="24"
-      >
-        <GridFixedContainer rAuto columns=".1fr 1fr" centerY mb="16">
-          <NumberWrapper w="20" h="20">
-            <Text size={{ mobile: 14 }} weight="600" color="orange" center>
-              3
-            </Text>
-          </NumberWrapper>
-          <Title as="h4" weight="600">
-            em relacões à conformidade com as leis
-          </Title>
-        </GridFixedContainer>
-
-        <GridFixedContainer columns="1fr" rows="1fr" w100>
-          <CardData number={allLegal} description="LEGAL" />
-        </GridFixedContainer>
-      </FlexContainer>
-    </FadeIn>
+          <GridFixedContainer columns="1fr" rows="1fr" w100 centerX centerY>
+            <CardData number={allLegal} description="LEGAL" />
+          </GridFixedContainer>
+        </FlexContainer>
+      </FadeIn>
+      <SizedBox />
+    </GridFixedContainer>
   );
 };
 

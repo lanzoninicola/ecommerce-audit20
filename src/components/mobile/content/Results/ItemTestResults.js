@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Text } from "@typography";
+import { Text, Title } from "@typography";
 import { GridFixedContainer, FlexContainer, SizedBox } from "@layouts";
 
 import Card from "../../Cards/CardWrapper";
@@ -48,7 +48,7 @@ const ResultImpactIcon = ({ result }) => {
 
 const SectionTitle = ({ children }) => {
   return (
-    <Text size={{ mobile: 12 }} weight="600" left>
+    <Text size={{ mobile: 14, laptop: 18 }} weight="600" left>
       {children}
     </Text>
   );
@@ -56,7 +56,7 @@ const SectionTitle = ({ children }) => {
 
 const SectionText = ({ children }) => {
   return (
-    <Text size={{ mobile: 12 }} left>
+    <Text size={{ mobile: 12, laptop: 16 }} left>
       {children}
     </Text>
   );
@@ -73,7 +73,7 @@ const ItemTestResults = ({ itemData, index }) => {
 
   return (
     <SizedBox>
-      <Card>
+      <Card pt="20" pl="20" pr="20" pb="20">
         <div
           style={{
             paddingLeft: "8px",
@@ -88,9 +88,15 @@ const ItemTestResults = ({ itemData, index }) => {
             centerY
           >
             <FlexContainer column>
-              <Text size={{ mobile: 14 }} weight="600" left color="orange">
+              <Title
+                as="h4"
+                // size={{ mobile: 14, laptop: 18 }}
+                weight="600"
+                left
+                color="orange"
+              >
                 {itemData.subcategoria}
-              </Text>
+              </Title>
               <SectionText>{itemData.categoria}</SectionText>
             </FlexContainer>
 
@@ -119,7 +125,7 @@ const ItemTestResults = ({ itemData, index }) => {
           <FlexContainer row centerX centerY>
             <PrimaryOutlineButton
               buttonStyle={{
-                w: "200",
+                w: "250",
                 h: "30",
                 mt: "8",
                 mb: "8",
@@ -131,7 +137,7 @@ const ItemTestResults = ({ itemData, index }) => {
                   : "veja os comentarios"
               }
               textStyle={{
-                size: { mobile: 12 },
+                size: { mobile: 12, laptop: 16 },
                 color: "orange",
                 weight: "800",
               }}

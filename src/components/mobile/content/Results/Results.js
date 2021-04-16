@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { FlexContainer, SizedBox } from "@layouts";
+import { GridFixedContainer, SizedBox } from "@layouts";
 import { useViewportInfo } from "@hooks";
 
 import GlobalTestResult from "./GlobalTestResult";
@@ -19,21 +19,34 @@ const ResultsStats = () => {
 
   return (
     // <FadeIn>
-    <FlexContainer column pl="32" pr="32" w={width} wFixed>
-      {showItemsList === false && (
-        <>
-          <GlobalTestResult />
-          <SizedBox h={48} />
-          <SectionTestResult handleDetails={handleDetails} />
-        </>
-      )}
-      {showItemsList === true && (
-        <ItemListTestResults
-          recordsOfPage={showRecordsOfPage}
-          setShowItemsList={setShowItemsList}
-        />
-      )}
-    </FlexContainer>
+    <GridFixedContainer
+      columns={{
+        mobile: "1fr",
+        laptop: ".50fr 1fr .50fr",
+      }}
+      pl={{ mobile: "32" }}
+      pr={{ mobile: "32" }}
+      rAuto
+      w100v
+    >
+      <SizedBox />
+      <SizedBox>
+        {showItemsList === false && (
+          <>
+            <GlobalTestResult />
+            <SizedBox h={48} />
+            <SectionTestResult handleDetails={handleDetails} />
+          </>
+        )}
+        {showItemsList === true && (
+          <ItemListTestResults
+            recordsOfPage={showRecordsOfPage}
+            setShowItemsList={setShowItemsList}
+          />
+        )}
+      </SizedBox>
+      <SizedBox />
+    </GridFixedContainer>
     // </FadeIn>
   );
 };

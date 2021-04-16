@@ -1,5 +1,6 @@
-import Title from "./title"
-import Text from "./text"
-import SmallText from "./smallText"
+import Title from "./title";
+import Text from "./text";
+import TextSpan from "./textSpan";
+import SmallText from "./smallText";
 
-export { Title, Text, SmallText }
+export { Title, Text, TextSpan, SmallText };

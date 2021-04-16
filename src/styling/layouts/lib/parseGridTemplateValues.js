@@ -1,18 +1,18 @@
-import { stringToArray, arrayToString, right } from "@utils/index"
+import { stringToArray, arrayToString, right } from "@utils/index";
 
 const parseGridTemplateValues = (values = "") => {
-  const parsedRowsProp = stringToArray(values, " ")
-  let parsedRowsPropArray = parsedRowsProp.map(value => {
+  const parsedRowsProp = stringToArray(values, " ");
+  let parsedRowsPropArray = parsedRowsProp.map((value) => {
     if (right(value, 2) === "fr") {
       if (value === "1fr") {
-        return "minmax(0, 1fr)"
+        return "minmax(0, 1fr)";
       }
-      return value
+      return value;
     }
-    return ""
-  })
+    return "";
+  });
 
-  return arrayToString(parsedRowsPropArray, " ")
-}
+  return arrayToString(parsedRowsPropArray, " ");
+};
 
-export default parseGridTemplateValues
+export default parseGridTemplateValues;

@@ -13,7 +13,7 @@ import ResultCard from "../../Cards/ResultCard";
 
 const SectionTitle = ({ children }) => {
   return (
-    <Title as="h4" weight="600" mb="16">
+    <Title as="h3" weight="600" mb="32">
       {children}
     </Title>
   );
@@ -53,7 +53,13 @@ const SectionTestResult = ({ handleDetails }) => {
           notTested={notTested ? notTested : 0}
           handleDetails={() => handleDetails(pageName)}
         >
-          <Text center size={{ mobile: 12 }} mt="8" weight="600" color="orange">
+          <Text
+            center
+            size={{ mobile: 12, laptop: 18 }}
+            mt="8"
+            weight="600"
+            color="orange"
+          >
             clique para ver os detalhes
           </Text>
         </ResultCard>

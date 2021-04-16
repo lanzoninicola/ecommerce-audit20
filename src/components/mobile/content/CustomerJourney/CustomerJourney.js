@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Title, Text, SmallText } from "@typography";
 import { FlexContainer, SizedBox } from "@layouts";
 import { colorTheme } from "@colors/lib";
-import { useViewportInfo } from "@hooks";
 
 import NumberWrapper from "../../NumberWrapper/NumberWrapper";
 
@@ -47,8 +46,6 @@ const items = [
 ];
 
 const CustomerJourney = () => {
-  const { width } = useViewportInfo();
-
   const variants = {
     visible: (i) => ({
       opacity: 1,
@@ -78,13 +75,13 @@ const CustomerJourney = () => {
           variants={variants}
         >
           {typeof item === "string" ? (
-            <FlexContainer column centerX centerY mt="4">
+            <FlexContainer column centerX centerY mt="8">
               <NumberWrapper w="25" h="25">
                 <SmallText weight="600" color="orange" center>
                   {itemCounter++}
                 </SmallText>
               </NumberWrapper>
-              <Text size={{ mobile: 16 }} center weight="400" mb="4">
+              <Text size={{ mobile: 16 }} center weight="400" mb="8">
                 {item}
               </Text>
             </FlexContainer>

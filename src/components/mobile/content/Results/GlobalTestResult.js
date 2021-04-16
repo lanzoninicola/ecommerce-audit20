@@ -20,7 +20,7 @@ const GlobalTestResult = () => {
 
   return (
     <>
-      <Title as="h4" weight="600" mb="16">
+      <Title as="h3" weight="600" mb="16">
         Resultado global do site
       </Title>
       <GridFixedContainer columns="1fr 1fr" rows="1fr 1fr" pt="8" pb="8">

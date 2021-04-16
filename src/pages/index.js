@@ -1,80 +1,80 @@
 import * as React from "react";
-import styled from "styled-components";
 
-import { FlexContainer, SizedBox, GridFixedContainer } from "@layouts";
-import { ViewportInfoData } from "@layouts/lib";
-import { SmallText } from "@typography";
+import { Text, SmallText } from "@typography";
+import { FlexContainer, GridFixedContainer } from "@layouts";
+import { InputText } from "@input";
 
-import Introduction from "../components/mobile/content/Introduction/Introduction";
-import ReportExplanation from "../components/mobile/content/ReportExplanation/ReportExplanation";
-import Layout from "../components/layout";
-import NextButton from "../components/mobile/NextButton/NextButton";
-import PrevButton from "../components/mobile/PrevButton/PrevButton";
-import CustomerJourney from "../components/mobile/content/CustomerJourney/CustomerJourney";
-import Impacts from "../components/mobile/content/Impacts/Impact";
-import SummaryStats from "../components/mobile/content/SummaryStats/SummaryStats";
-import ResultsIntroduction from "../components/mobile/content/ResultsIntroduction/ResultsIntroduction";
-import ResultsStats from "../components/mobile/content/Results/Results";
+import Card from "../components/mobile/Cards/CardWrapper";
+import { PrimaryButton } from "../components/mobile/Buttons/Buttons";
 
-// device, size, height, width, diagonal
+const app_passcode = process.env.APP_PASSCODE;
 
-// markup
 const IndexPage = () => {
-  const [currentPage, setCurrentPage] = React.useState(0);
+  const [passCode, setPasscode] = React.useState([]);
 
-  const pagesQueue = [
-    <Introduction />,
-    <ReportExplanation />,
-    <CustomerJourney />,
-    <Impacts />,
-    <SummaryStats />,
-    <ResultsIntroduction />,
-    <ResultsStats />,
-  ];
+  console.log(app_passcode);
 
-  function nextPage() {
-    let newPage = currentPage;
-    setCurrentPage(() => {
-      newPage = currentPage + 1;
-      newPage = newPage > pagesQueue.length - 1 ? currentPage : newPage;
-      return newPage;
-    });
-  }
+  function handleClickBtn(number) {
+    let userPasscode = [...passCode];
+    userPasscode.push(number);
 
-  function prevPage() {
-    let newPage = currentPage;
-    setCurrentPage(() => {
-      newPage = currentPage - 1;
-      newPage = newPage < 0 ? 0 : newPage;
-      return newPage;
-    });
+    setPasscode(userPasscode);
   }
 
   return (
-    <Layout>
-      {/* <ViewportInfoData /> */}
-      <GridFixedContainer
-        columns="1fr 1fr"
-        rows="1fr"
-        pt="16"
-        pl="32"
-        pr="32"
-        mb="32"
-      >
-        <SizedBox>
-          <SmallText color="black">Auditoria de site</SmallText>
-        </SizedBox>
-        <FlexContainer row right>
-          <PrevButton prevPage={prevPage} />
-          <SizedBox w="16" />
-          <NextButton nextPage={nextPage} />
+    <FlexContainer h100v w100v>
+      <GridFixedContainer columns="1fr" rows="1fr .1fr" h100 centerX centerY>
+        <Card
+          style={{
+            width: "300px",
+            padding: "20px",
+          }}
+        >
+          <Text>Passcode</Text>
+          <PrimaryButton
+            text="1"
+            textStyle={{
+              color: "white",
+            }}
+            buttonStyle={{
+              mb: "16",
+            }}
+            onClick={() => handleClickBtn(1)}
+          />
+          <PrimaryButton
+            text="2"
+            textStyle={{
+              color: "white",
+            }}
+            buttonStyle={{
+              mb: "16",
+            }}
+            onClick={() => handleClickBtn(2)}
+          />
+          <PrimaryButton
+            text="3"
+            textStyle={{
+              color: "white",
+            }}
+            buttonStyle={{
+              mb: "16",
+            }}
+            onClick={() => handleClickBtn(3)}
+          />
+          <Text>
+            {passCode.length > 0
+              ? passCode.join("") === app_passcode
+                ? "code correct"
+                : "code not correct"
+              : null}
+          </Text>
+        </Card>
+        <FlexContainer column centerY>
+          <SmallText>Website developed by Lanzoni Nicola</SmallText>
+          <SmallText>lanzoni.nicola@gmail.com</SmallText>
         </FlexContainer>
       </GridFixedContainer>
-
-      <FlexContainer column centerX>
-        {pagesQueue[currentPage]}
-      </FlexContainer>
-    </Layout>
+    </FlexContainer>
   );
 };
 

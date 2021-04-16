@@ -15,12 +15,12 @@ const typographyTheme = () => {
         lineHeight: { mobile: 34, tablet: 35, laptop: 52 },
       },
       h3: {
-        fontSize: { mobile: 22, tablet: 31, laptop: 40 },
-        lineHeight: { mobile: 26, tablet: 34, laptop: 46 },
+        fontSize: { mobile: 22, tablet: 31, laptop: 32 },
+        lineHeight: { mobile: 26, tablet: 34, laptop: 36 },
       },
       h4: {
-        fontSize: { mobile: 20, tablet: 24, laptop: 34 },
-        lineHeight: { mobile: 23, tablet: 30, laptop: 38 },
+        fontSize: { mobile: 20, tablet: 24, laptop: 26 },
+        lineHeight: { mobile: 23, tablet: 30, laptop: 30 },
       },
       h5: {
         fontSize: { mobile: 16, tablet: 18, laptop: 28 },
@@ -36,11 +36,11 @@ const typographyTheme = () => {
 
       body: {
         fontSize: { mobile: 20, tablet: 22, laptop: 26 },
-        lineHeight: { mobile: 28, tablet: 23, laptop: 27 },
+        lineHeight: { mobile: 28, tablet: 23, laptop: 31 },
       },
       small: {
-        fontSize: { mobile: 14, tablet: 10, laptop: 13 },
-        lineHeight: { mobile: 16, tablet: 13, laptop: 15 },
+        fontSize: { mobile: 14, tablet: 10, laptop: 14 },
+        lineHeight: { mobile: 16, tablet: 13, laptop: 16 },
       },
       // caption: a title or brief explanation appended to an illustration, cartoon, or poster.
       caption: {},

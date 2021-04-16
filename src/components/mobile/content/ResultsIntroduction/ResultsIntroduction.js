@@ -13,7 +13,13 @@ import {
 
 const ResultsIntroduction = () => {
   return (
-    <FlexContainer column centerY centerX pl="32" pr="32">
+    <FlexContainer
+      column
+      centerY
+      centerX
+      pl={{ mobile: "32", laptop: "192" }}
+      pr={{ mobile: "32", laptop: "192" }}
+    >
       <FadeIn>
         <FlexContainer column pb="16">
           <Title as="h3" weight="600" mb="16">

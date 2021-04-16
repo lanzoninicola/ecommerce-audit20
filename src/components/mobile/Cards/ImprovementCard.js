@@ -1,23 +1,28 @@
 import * as React from "react";
 import { Text } from "@typography";
-import { FlexContainer, SizedBox } from "@layouts";
+import { GridFixedContainer } from "@layouts";
 import { ImprovementIcon } from "../Icons/TestResults/TestResults";
 import Card from "./CardWrapper";
 
 const ImprovementCard = ({ data }) => {
   return (
-    <Card>
-      <FlexContainer column centerX centerY>
-        <Text size={{ mobile: 40 }} weight="800" color="yellow">
+    <Card pt="20" pl="20" pr="20" pb="20">
+      <GridFixedContainer
+        columns="1fr"
+        rows="1fr .25fr .25fr"
+        gap="4"
+        centerX
+        centerY
+        h100
+      >
+        <Text size={{ mobile: 40, laptop: 60 }} weight="800" color="yellow">
           {data}
         </Text>
-        <SizedBox h="4" />
         <ImprovementIcon />
-        <SizedBox h="4" />
         <Text weight="600" size={{ mobile: 12 }} color="yellow" center>
           Oportunidade de Melhorar
         </Text>
-      </FlexContainer>
+      </GridFixedContainer>
     </Card>
   );
 };
