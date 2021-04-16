@@ -62,12 +62,7 @@ const IndexPage = () => {
         mb="32"
       >
         <SizedBox>
-          <SmallText color="black">
-            Auditoria de site:
-            <SmallText color="black" weight="600">
-              lojasgaucha.com
-            </SmallText>
-          </SmallText>
+          <SmallText color="black">Auditoria de site</SmallText>
         </SizedBox>
         <FlexContainer row right>
           <PrevButton prevPage={prevPage} />

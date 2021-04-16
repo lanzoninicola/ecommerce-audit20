@@ -5,10 +5,8 @@ require("dotenv").config({
 
 let credentials = require("./gsheet/credentials.json");
 let spreadsheetId = process.env.GSHEET_SPREADSHEET_ID;
-let private_key = process.env.GSHEET_PRIVATE_KEY;
+let private_key = process.env.GSHEET_PRIVATE_KEY.replace(/\\n/gm, "\n");
 credentials = { ...credentials, private_key: private_key };
-
-console.log(spreadsheetId);
 
 module.exports = {
   siteMetadata: {
