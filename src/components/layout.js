@@ -7,11 +7,7 @@ import DataProvider from "../data/context/DataProvider";
 // import DOMViewportInfo from "@layouts/lib"
 
 const Layout = ({ children }) => {
-  return (
-    <WebsiteLayout>
-      <DataProvider>{children}</DataProvider>
-    </WebsiteLayout>
-  );
+  return <WebsiteLayout>{children}</WebsiteLayout>;
 };
 
 Layout.propTypes = {

@@ -1,21 +1,22 @@
 import * as React from "react";
 import { useLocalStorage } from "@hooks";
 import AuthContext from "./AuthContext";
+import authStatusEnums from "../enums/authStatusEnums";
 
 const AuthProvider = ({ children }) => {
   //   const [authStatus, setAuthStatus] = React.useState("anonymous");
   const [authStatus, setAuthStatus] = useLocalStorage(
     "auditoria_authStatus",
-    "anonymous",
+    authStatusEnums.anonymous,
     30
   );
 
   function shouldAuthenticate() {
-    setAuthStatus("authenticated");
+    setAuthStatus(authStatusEnums.authenticated);
   }
 
   function loggingOff() {
-    setAuthStatus("anonymous");
+    setAuthStatus(authStatusEnums.anonymous);
   }
 
   const authContext = {

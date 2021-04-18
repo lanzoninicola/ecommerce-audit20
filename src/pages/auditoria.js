@@ -1,6 +1,7 @@
 import * as React from "react";
 import { navigate } from "gatsby-link";
 import AuthContext from "../components/Auth/context/AuthContext";
+import authStatusEnums from "../components/Auth/enums/authStatusEnums";
 
 import { FlexContainer, SizedBox, GridFixedContainer } from "@layouts";
 // import { ViewportInfoData } from "@layouts/lib";
@@ -16,8 +17,6 @@ import Impacts from "../components/Impacts/Impacts";
 import SummaryStats from "../components/SummaryStats/SummaryStats";
 import ResultsIntroduction from "../components/ResultsIntroduction/ResultsIntroduction";
 import ResultsStats from "../components/Results/Results";
-
-import { useLocalStorage } from "@hooks";
 
 // device, size, height, width, diagonal
 
@@ -55,9 +54,7 @@ const Auditoria = () => {
   }
 
   function isAuthenticated() {
-    console.log(authContext);
-
-    if (authContext.authStatus === "anonymous") {
+    if (authContext.authStatus === authStatusEnums.anonymous) {
       navigate("/");
     }
   }
