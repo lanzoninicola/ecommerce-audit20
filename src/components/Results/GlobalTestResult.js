@@ -1,13 +1,13 @@
 import * as React from "react";
-import DataContext from "../../../../data/DataContext";
+import DataContext from "../../data/context/DataContext";
 
 import { Title, Text } from "@typography";
 import { FlexContainer, GridFixedContainer, SizedBox } from "@layouts";
 
-import PassedCard from "../../Cards/PassedCard";
-import ImprovementCard from "../../Cards/ImprovementCard";
-import NotPassedCard from "../../Cards/NotPassedCard";
-import NotTestedCard from "../../Cards/NotTestedCard";
+import PassedCard from "../ui/Cards/PassedCard";
+import ImprovementCard from "../ui/Cards/ImprovementCard";
+import NotPassedCard from "../ui/Cards/NotPassedCard";
+import NotTestedCard from "../ui/Cards/NotTestedCard";
 
 const GlobalTestResult = () => {
   const dataContext = React.useContext(DataContext);

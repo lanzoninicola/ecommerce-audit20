@@ -6,7 +6,7 @@ import { Title, Text, SmallText } from "@typography";
 import { FlexContainer, SizedBox } from "@layouts";
 import { colorTheme } from "@colors/lib";
 
-import NumberWrapper from "../../NumberWrapper/NumberWrapper";
+import NumberWrapper from "../ui/NumberWrapper/NumberWrapper";
 
 const DotSeparators = styled.div`
   border: none;

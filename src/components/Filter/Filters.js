@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
-import { useLocalStorage } from "@penseapp/uselocalstorage";
 
+import { useLocalStorage } from "@hooks";
 import { Text, SmallText } from "@typography";
 import { FlexContainer, SizedBox } from "@layouts";
 import { BaseButton } from "@buttons";
@@ -9,9 +9,9 @@ import { colorTheme } from "@colors/lib";
 import { objectKeys } from "@utils";
 import { SVGIcon } from "@icons";
 
-import testResults from "../../../data/enums/testResults";
-import impacts from "../../../data/enums/impacts";
-import { PrimaryButton, PrimaryOutlineButton } from "../Buttons/Buttons";
+import testResults from "../../data/enums/testResults";
+import impacts from "../../data/enums/impacts";
+import { PrimaryButton, PrimaryOutlineButton } from "../ui/Buttons/Buttons";
 
 const StyledFilterWindow = styled.div`
   border: none;

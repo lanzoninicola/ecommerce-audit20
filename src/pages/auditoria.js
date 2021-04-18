@@ -3,19 +3,19 @@ import { navigate } from "gatsby-link";
 import AuthContext from "../components/Auth/context/AuthContext";
 
 import { FlexContainer, SizedBox, GridFixedContainer } from "@layouts";
-import { ViewportInfoData } from "@layouts/lib";
+// import { ViewportInfoData } from "@layouts/lib";
 import { SmallText } from "@typography";
 
-import Introduction from "../components/mobile/content/Introduction/Introduction";
-import ReportExplanation from "../components/mobile/content/ReportExplanation/ReportExplanation";
+import Introduction from "../components/Introduction/Introduction";
+import ReportExplanation from "../components/ReportExplanation/ReportExplanation";
 import Layout from "../components/layout";
-import NextButton from "../components/mobile/NextButton/NextButton";
-import PrevButton from "../components/mobile/PrevButton/PrevButton";
-import CustomerJourney from "../components/mobile/content/CustomerJourney/CustomerJourney";
-import Impacts from "../components/mobile/content/Impacts/Impact";
-import SummaryStats from "../components/mobile/content/SummaryStats/SummaryStats";
-import ResultsIntroduction from "../components/mobile/content/ResultsIntroduction/ResultsIntroduction";
-import ResultsStats from "../components/mobile/content/Results/Results";
+import NextButton from "../components/ui/NextButton/NextButton";
+import PrevButton from "../components/ui/PrevButton/PrevButton";
+import CustomerJourney from "../components/CustomerJourney/CustomerJourney";
+import Impacts from "../components/Impacts/Impacts";
+import SummaryStats from "../components/SummaryStats/SummaryStats";
+import ResultsIntroduction from "../components/ResultsIntroduction/ResultsIntroduction";
+import ResultsStats from "../components/Results/Results";
 
 import { useLocalStorage } from "@hooks";
 

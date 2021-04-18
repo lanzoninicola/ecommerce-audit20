@@ -3,7 +3,7 @@ import * as React from "react";
 import { Title, Text } from "@typography";
 import { FlexContainer, SizedBox, GridFixedContainer } from "@layouts";
 import { FadeIn } from "@animations";
-import NumberWrapper from "../../NumberWrapper/NumberWrapper";
+import NumberWrapper from "../ui/NumberWrapper/NumberWrapper";
 
 const ReportExplanation = () => {
   return (

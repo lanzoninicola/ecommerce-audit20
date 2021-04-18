@@ -7,7 +7,7 @@ import { Title, Text, SmallText } from "@typography";
 import { FlexContainer, GridFixedContainer, SizedBox } from "@layouts";
 import { FadeIn } from "@animations";
 import { useViewportInfo } from "@hooks";
-import NumberWrapper from "../../NumberWrapper/NumberWrapper";
+import NumberWrapper from "../ui/NumberWrapper/NumberWrapper";
 
 const Card = styled.div`
   border: none;

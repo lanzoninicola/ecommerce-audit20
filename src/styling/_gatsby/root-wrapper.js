@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import { GlobalStyle, theme } from "@theme";
 import { ViewportProvider } from "@layouts";
 import { ModalProvider } from "@overlays";
-import DataProvider from "../../data/DataProvider";
+import DataProvider from "../../data/context/DataProvider";
 import AuthProvider from "../../components/Auth/context/AuthProvider";
 
 // this is a gatsby function and not a React component

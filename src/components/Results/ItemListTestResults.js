@@ -1,15 +1,15 @@
 import * as React from "react";
-import DataContext from "../../../../data/DataContext";
+import DataContext from "../../data/context/DataContext";
 
 import { Text } from "@typography";
 import { FlexContainer, SizedBox, GridFixedContainer } from "@layouts";
 import { objectKeys } from "@utils";
 import { useViewportInfo } from "@hooks";
 
-import BackButton from "../../BackButton/BackButton";
+import BackButton from "../ui/BackButton/BackButton";
 
-import Filters from "../../Filter/Filters";
-import FilterButton from "../../Filter/FilterButton";
+import Filters from "../Filter/Filters";
+import FilterButton from "../Filter/FilterButton";
 
 import ItemTestResults from "./ItemTestResults";
 import ItemListAppBar from "./ItemListAppBar";

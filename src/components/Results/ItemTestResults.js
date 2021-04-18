@@ -3,16 +3,20 @@ import * as React from "react";
 import { Text, Title } from "@typography";
 import { GridFixedContainer, FlexContainer, SizedBox } from "@layouts";
 
-import Card from "../../Cards/CardWrapper";
+import Card from "../ui/Cards/CardWrapper";
 import {
   PassedIcon,
   NotPassedIcon,
   ImprovementIcon,
   NotTestedIcon,
-} from "../../Icons/TestResults/TestResults";
-import { HighImpact, MediumImpact, LowImpact } from "../../Icons/Impact/Impact";
-import testResults from "../../../../data/enums/testResults";
-import { PrimaryOutlineButton } from "../../Buttons/Buttons";
+} from "../ui/Icons/TestResults/TestResults";
+import {
+  HighImpact,
+  MediumImpact,
+  LowImpact,
+} from "../ui/Icons/Impacts/Impacts";
+import testResults from "../../data/enums/testResults";
+import { PrimaryOutlineButton } from "../ui/Buttons/Buttons";
 
 const ResultTestIcon = ({ result }) => {
   if (result === testResults.passed) {

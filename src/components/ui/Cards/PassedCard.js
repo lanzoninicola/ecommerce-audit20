@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Text } from "@typography";
-import { FlexContainer, SizedBox, GridFixedContainer } from "@layouts";
+import { GridFixedContainer } from "@layouts";
 import { PassedIcon } from "../Icons/TestResults/TestResults";
 import Card from "./CardWrapper";
 

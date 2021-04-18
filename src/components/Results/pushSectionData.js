@@ -1,4 +1,4 @@
-import testResults from "../../../../config/testResults";
+import testResults from "../../config/testResults";
 
 function pushSectionData(page) {
   const dataParsed = {};

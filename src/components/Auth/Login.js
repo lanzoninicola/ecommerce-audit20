@@ -6,8 +6,8 @@ import { FlexContainer, GridFixedContainer } from "@layouts";
 
 import AuthContext from "./context/AuthContext";
 
-import { PrimaryButton, PrimaryOutlineButton } from "../mobile/Buttons/Buttons";
-import Card from "../mobile/Cards/CardWrapper";
+import { PrimaryButton, PrimaryOutlineButton } from "../ui/Buttons/Buttons";
+import Card from "../ui/Cards/CardWrapper";
 
 import PasscodeButton from "./PasscodeButton";
 import LoginEntity from "./entity/LoginEntity";
@@ -76,8 +76,6 @@ const Login = () => {
   React.useEffect(() => {
     reversePasscodeKeyboard();
   }, [reversePasscodeKeyboard, passcodeKeyboard, httpErrorMessage]);
-
-  //  85569887
 
   return (
     <FlexContainer h100v w100v>

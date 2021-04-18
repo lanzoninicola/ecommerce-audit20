@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import DataContext from "./DataContext";
-import auditRecordEntity from "./entity/auditRecordEntity";
-import auditRecordModel from "./model/auditRecordModel";
-import analyticalDatabase from "./lib/analyticalDatabase";
+import auditRecordEntity from "../entity/auditRecordEntity";
+import auditRecordModel from "../model/auditRecordModel";
+import analyticalDatabase from "../lib/analyticalDatabase";
 
 const DataProvider = ({ children }) => {
   const data = useStaticQuery(graphql`

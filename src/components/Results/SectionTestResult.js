@@ -7,9 +7,9 @@ import {
   FlexContainer,
 } from "@layouts";
 
-import DataContext from "../../../../data/DataContext";
-import analyticalUnits from "../../../../config/analyticalUnits";
-import ResultCard from "../../Cards/ResultCard";
+import DataContext from "../../data/context/DataContext";
+import analyticalUnits from "../../config/analyticalUnits";
+import ResultCard from "../../components/ui/Cards/ResultCard";
 
 const SectionTitle = ({ children }) => {
   return (

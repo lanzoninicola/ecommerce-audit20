@@ -9,7 +9,7 @@ import {
   NotPassedIcon,
   ImprovementIcon,
   NotTestedIcon,
-} from "../../Icons/TestResults/TestResults";
+} from "../ui/Icons/TestResults/TestResults";
 
 const ResultsIntroduction = () => {
   return (

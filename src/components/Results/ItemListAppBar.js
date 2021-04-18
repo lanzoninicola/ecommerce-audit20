@@ -2,9 +2,9 @@ import * as React from "react";
 
 import { FlexContainer } from "@layouts";
 
-import BackButton from "../../BackButton/BackButton";
+import BackButton from "../ui/BackButton/BackButton";
 
-import FilterButton from "../../Filter/FilterButton";
+import FilterButton from "../Filter/FilterButton";
 
 const ItemListAppBar = ({ setShowItemsList, showFilterWindow }) => {
   return (
