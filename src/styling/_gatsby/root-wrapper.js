@@ -7,6 +7,7 @@ import { ViewportProvider } from "@layouts";
 import { ModalProvider } from "@overlays";
 import DataProvider from "../../data/context/DataProvider";
 import AuthProvider from "../../components/Auth/context/AuthProvider";
+import RoutingProvider from "../../components/Routing/context/RoutingProvider";
 
 // this is a gatsby function and not a React component
 // https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser/#wrapRootElement
@@ -19,9 +20,11 @@ const wrapRootElement = ({ element }) => {
         <Helmet></Helmet>
         <ViewportProvider>
           <AuthProvider>
-            <DataProvider>
-              <ModalProvider>{element}</ModalProvider>
-            </DataProvider>
+            <RoutingProvider>
+              <DataProvider>
+                <ModalProvider>{element}</ModalProvider>
+              </DataProvider>
+            </RoutingProvider>
           </AuthProvider>
         </ViewportProvider>
       </ThemeProvider>

@@ -1,10 +1,10 @@
 import * as React from "react";
 import { navigate } from "gatsby-link";
+import AuthContext from "./context/AuthContext";
+import RoutingContext from "../Routing/context/RoutingContext";
 
 import { Text, SmallText, TextSpan } from "@typography";
 import { FlexContainer, GridFixedContainer } from "@layouts";
-
-import AuthContext from "./context/AuthContext";
 
 import { PrimaryButton, PrimaryOutlineButton } from "../ui/Buttons/Buttons";
 import Card from "../ui/Cards/CardWrapper";
@@ -17,6 +17,7 @@ const loginBrain = LoginEntity();
 
 const Login = () => {
   const authContext = React.useContext(AuthContext);
+  const routingContext = React.useContext(RoutingContext);
   const [passcodeKeyboard, setPasscodeKeyboard] = React.useState(
     loginBrain.init()
   );
@@ -42,7 +43,7 @@ const Login = () => {
 
   function authorizeAndRedirect() {
     authContext.shouldAuthenticate();
-    navigate("/auditoria");
+    routingContext.nextPage();
   }
 
   function showLoginError(message) {
