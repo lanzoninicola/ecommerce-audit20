@@ -1,4 +1,8 @@
 exports.handler = async function (event, context) {
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
+  }
+
   const serverPasscode = process.env.APP_PASSCODE;
   const { userPasscode } = JSON.parse(event.body);
   const _userPasscode = userPasscode.trim();
@@ -8,7 +12,7 @@ exports.handler = async function (event, context) {
       statusCode: 200,
       body: JSON.stringify({
         authSuccess: true,
-        message: "User is authenticated",
+        message: "Usuário foi autenticado",
       }),
     };
   }
