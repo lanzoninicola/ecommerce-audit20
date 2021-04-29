@@ -41,7 +41,7 @@ const ReportExplanation = () => {
               </Text>
             </NumberWrapper>
             <Text>
-              Presença das ferramentas para monitorar o comportamentos dos
+              Presença das ferramentas para monitorar o comportamento dos
               visitantes ao navegarem pelas páginas do seu site e traçar
               estratégias para o seu negócio.
             </Text>
@@ -53,7 +53,7 @@ const ReportExplanation = () => {
               </Text>
             </NumberWrapper>
             <Text>
-              Presença dos elementos para protejer o seu negócio assegurando que
+              Presença dos elementos para proteger o seu negócio assegurando que
               o site esteja em conformidade com as leis, regras e regulamentos
               nacionais.
             </Text>

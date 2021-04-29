@@ -182,7 +182,7 @@ const SummaryStats = () => {
             Numeros dos elementos analizados
           </Title>
           <Text size={{ mobile: 14, laptop: 16 }} mb="32">
-            Em nessa analisi foi excluido outras 54 elementos analizados com
+            Em nessa análise foi excluido outras 54 elementos analizados com
             referencia as possibilidade do site de ser incluido na primeira
             pagina do motor de busca
           </Text>

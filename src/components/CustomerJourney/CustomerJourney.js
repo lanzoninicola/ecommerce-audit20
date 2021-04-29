@@ -38,7 +38,7 @@ const items = [
   1,
   1,
   1,
-  "additionar o produto no carrinho",
+  "adicionar o produto no carrinho",
   1,
   1,
   1,
