@@ -35,7 +35,7 @@ const GlobalTestResult = () => {
         <Text size={{ mobile: 14 }} mb="4">
           {`${
             (passed / total) * 100
-          }% dos elementos passou a analisi e não são necessárias atividade`}
+          }% dos elementos passou a análise e não são necessárias atividade`}
         </Text>
         <Text size={{ mobile: 14 }} mb="4">
           {`${
